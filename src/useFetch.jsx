@@ -35,7 +35,25 @@ const useFetch = (url) => {
     return () => abortCont.abort();
   }, [url]); //url as a dependency if the url changes it will be re-rendered
 
-  return { data, isPending, error };
+  const createNewPerson = (person) => {
+    setIsPending(true);
+
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(person),
+    })
+      .then((response) => {
+        setIsPending(false);
+        return response.json;
+      })
+      .catch((error) => {
+        setIsPending(false);
+        setError(error.message);
+      });
+  };
+
+  return { data, isPending, error, createNewPerson };
 }
 
 export default useFetch;

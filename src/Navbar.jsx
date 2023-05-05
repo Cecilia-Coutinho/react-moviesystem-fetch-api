@@ -6,7 +6,7 @@ const Navbar = () => {
       <h1>Reactklient</h1>
       <div className="links">
         <Link to="/">Home</Link>
-        <Link to="/createtask">New Person</Link>
+        <Link to="/createperson">New Person</Link>
       </div>
     </nav>
   );
