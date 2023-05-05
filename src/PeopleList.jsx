@@ -1,4 +1,53 @@
 import { Link } from "react-router-dom";
+import styled, { css } from 'styled-components';
+
+const PersonPreviewStyled = styled.div`
+  padding: 20px 16px;
+  margin: 25px 0;
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-3);
+  box-shadow: 2px 4px 6px var(--color-primary-3);
+
+  &:hover {
+    background-color: var(--color-primary-3);
+  }
+`;
+
+const Title = styled.h2`
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: var(--color-primary-1);
+`;
+
+const PersonBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+const PersonTitle = styled.h2`
+  padding: 10px 16px;
+  font-weight: 400;
+  font-size: 22px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const StyledButton = styled.button`
+  margin: 10px 10px 10px 0px;
+  padding: 5px 10px;
+  background-color: var(--color-primary-4);
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.3px;
+  color: var(--color-primary-5);
+  cursor: pointer;
+`
 
 //props ({ people, title, ...})
 const PeopleList = ({ people, title }) => {
@@ -16,7 +65,7 @@ const PeopleList = ({ people, title }) => {
 
   return (
     <div className="people-list">
-      <h2>{title}</h2>
+      <Title>{title}</Title>
 
       {/*
         * outputting list
@@ -24,15 +73,18 @@ const PeopleList = ({ people, title }) => {
         */
       }
       {sortedPeople.map((person) => (
-        <div key={person.personId}>
-          <Link to={`/person/${person.personId}`}>
-              <h2> {person.firstName} {person.lastName}</h2>
-              <button>GO TO PROFILE</button>
-          </Link>
-        </div>
+        <PersonPreviewStyled key={person.personId}>
+          <StyledLink to={`/person/${person.personId}`}>
+            <PersonBox>
+              <PersonTitle> {person.firstName} {person.lastName}</PersonTitle>
+              <StyledButton>GO TO PROFILE</StyledButton>
+            </PersonBox>
+          </StyledLink>
+        </PersonPreviewStyled>
       ))}
     </div>
   );
 }
 
 export default PeopleList;
+
