@@ -10,9 +10,15 @@ const CreatePerson = () => {
   const [isPending, setIsPending] = useState(false);
   const [createResult, setCreateResult] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const { createNewPerson } = useFetch('https://localhost:7294/api/person');
+  const navigateTo = useNavigate();
 
-  const validateEmail = (email) => {
-    // email validation logic here
+  const validateEmail = (mail) => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   const handleSubmit = (event) => {
@@ -28,15 +34,10 @@ const CreatePerson = () => {
 
       createNewPerson(newPerson)
         .then((response) => {
-          if (!response.ok) {
-            throw new Error('Could not create person');
-          } else {
-            console.log('Person created successfully');
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+            setIsPending(false);
+            setCreateResult(true);
+            navigateTo('/');
+          })
     }
   };
 
