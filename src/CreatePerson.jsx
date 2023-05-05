@@ -1,6 +1,44 @@
 import { useState, useEffect } from "react";
 import useFetch from "./useFetch"
 import { useNavigate } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import {
+  Title,
+  StyledButton
+} from './PeopleList';
+
+const CustomTitle = styled(Title)`
+  margin-bottom: 30px;
+`;
+
+const CreatePersonForm = styled.div`
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+
+  input {
+    width: 100%;
+    padding: 6px 10px;
+    outline: none;
+    border: 1px solid var(--color-primary-3);
+    box-sizing: border-box;
+    display: block;
+    font-size: 14px;
+    margin: 10px 0px 20px 0px;
+  }
+`;
+
+const LabelStyled = styled.label`
+  text-align: left;
+  display: block;
+  font-weight: 600;
+`;
+
+const ErrMsgStyled = styled.p`
+  margin: 30px;
+  color: var(--color-secondary-3);
+  font-weight: 600;
+`;
 
 const CreatePerson = () => {
   const [firstName, setFirstName] = useState('');
@@ -37,20 +75,20 @@ const CreatePerson = () => {
             setIsPending(false);
             setCreateResult(true);
             navigateTo('/');
-          })
+        })
     }
   };
 
   return (
-    <div>
-      <h2>Create Person</h2>
+    <CreatePersonForm>
+      <CustomTitle>Create Person</CustomTitle>
       {createResult !== null && (
-        <p>{createResult ? 'Person created successfully' : 'Failed to create person'}</p>
+        <ErrMsgStyled>{createResult ? 'Person created successfully' : 'Failed to create person'}</ErrMsgStyled>
       )}
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <ErrMsgStyled>{errorMessage}</ErrMsgStyled>}
 
       <form onSubmit={handleSubmit}>
-        <label> First Name: </label>
+        <LabelStyled> First Name: </LabelStyled>
         <input
           type="text"
           required
@@ -58,7 +96,7 @@ const CreatePerson = () => {
           onChange={(event) => setFirstName(event.target.value)}
         />
 
-        <label> Last Name: </label>
+        <LabelStyled> Last Name: </LabelStyled>
         <input
           type="text"
           required
@@ -66,17 +104,17 @@ const CreatePerson = () => {
           onChange={(event) => setLastName(event.target.value)}
         />
 
-        <label> email: </label>
+        <LabelStyled> email: </LabelStyled>
         <input
           type="text"
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        {!isPending && <button>Add Person</button>}
-        {isPending && <button disabled>Adding Person...</button>}
+        {!isPending && <StyledButton>Add Person</StyledButton>}
+        {isPending && <StyledButton disabled>Adding Person...</StyledButton>}
       </form>
-    </div>
+    </CreatePersonForm>
   );
 };
 

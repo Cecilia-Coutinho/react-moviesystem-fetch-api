@@ -13,7 +13,7 @@ const PersonPreviewStyled = styled.div`
   }
 `;
 
-const Title = styled.h2`
+export const Title = styled.h2`
   margin-top: 40px;
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   margin: 10px 10px 10px 0px;
   padding: 5px 10px;
   background-color: var(--color-primary-4);
