@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
-import { FaUser } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa';
+import ReactPaginate from 'react-paginate';
 
 const PersonPreviewStyled = styled.div`
   padding: 20px 16px;

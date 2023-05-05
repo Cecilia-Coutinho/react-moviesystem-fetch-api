@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from './Navbar'
 import Home from './Home';
 import CreatePerson from './CreatePerson';
+import PersonDetails from './PersonDetails';
 import {
   BrowserRouter,
   Routes,
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Home />}></Route>
             <Route path='/createperson' element={<CreatePerson />}></Route>
+            <Route path='/person/:id' element={<PersonDetails />}></Route>
             <Route path='*' element={<NotFound />}></Route>
           </Routes>
         </div>
