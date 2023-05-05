@@ -16,7 +16,7 @@ const StyledDetails = styled.div`
   font-weight: 600;
 `;
 
-const PersonDetails = () => {
+const PersonDetails = ({ personId }) => {
 
   const { id } = useParams();
   const { data: person, isPending: isPersonPending, error: personError } = useFetch('https://localhost:7294/api/person/' + id);
@@ -24,31 +24,35 @@ const PersonDetails = () => {
 
   const { data: genres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/PersonGenre/person?personId=${id}`);
 
-  const handleDeleteClick = () => {
-    fetch('https://localhost:7294/api/person/' + id, {
-      method: 'DELETE',
-    }).then(() => {
-      navigateTo('/');
-    });
-  }
-
   return (
     <StyledDetails>
       {isPersonPending && <div> Loading...</div>}
-      {personError && <div> {error}</div>}
+      {personError && <div> {personError.message}</div>}
       {person && (
         <article>
           <Title> {person.firstName} {person.lastName}</Title>
           <p>Email: {person.email}</p>
           <div>
             {isGenresPending && <div> Loading...</div>}
-            {genresError && <div> {error}</div>}
-            {genres && <GenresList genres={genres} title="Genre Preferences" />}
+            {genresError && (
+              <div>
+                <p>No genres found for this person.</p>
+                <StyledButton>Add New Genre</StyledButton>
+              </div>
+            )}
+            {genres && genres.length > 0 && (
+              <GenresList genres={genres} title="Genre Preferences" />
+            )}
+            {genres && genres.length === 0 && (
+              <div>
+                <p>No genres found for this person.</p>
+                <StyledButton>Add New Genre</StyledButton>
+              </div>
+            )}
           </div>
           <Link to={'/'}>
             <StyledButton>Return to Home</StyledButton>
           </Link>
-          <StyledButton onClick={handleDeleteClick}>Delete Person</StyledButton>
         </article>
       )}
     </StyledDetails>

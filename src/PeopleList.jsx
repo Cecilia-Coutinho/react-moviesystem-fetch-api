@@ -62,15 +62,9 @@ export const StyledButton = styled.button`
 const PeopleList = ({ people, title }) => {
 
   // Sort the people array by the firstName property
-  const sortedPeople = people.sort((a, b) => {
-    if (a.firstName < b.firstName) {
-      return -1;
-    } else if (a.firstName > b.firstName) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
+  const sortedPeople = people.sort((a, b) =>
+    a.lastName.localeCompare(b.firstName)
+  );
 
   return (
     <div className="people-list">
