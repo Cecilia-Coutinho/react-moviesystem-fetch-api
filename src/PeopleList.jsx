@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
+import { FaUser } from 'react-icons/fa'
 
 const PersonPreviewStyled = styled.div`
   padding: 20px 16px;
@@ -30,10 +31,17 @@ const PersonTitle = styled.h2`
   padding: 10px 16px;
   font-weight: 400;
   font-size: 22px;
+  color: var(--color-font-primary);
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+`;
+
+const PersonIcon = styled(FaUser)`
+  margin-right: 30px;
+  font-size: 28px;
+  color: var(--color-primary-3);
 `;
 
 export const StyledButton = styled.button`
@@ -76,7 +84,10 @@ const PeopleList = ({ people, title }) => {
         <PersonPreviewStyled key={person.personId}>
           <StyledLink to={`/person/${person.personId}`}>
             <PersonBox>
-              <PersonTitle> {person.firstName} {person.lastName}</PersonTitle>
+              <PersonTitle>
+                <PersonIcon />
+                {person.firstName} {person.lastName}
+              </PersonTitle>
               <StyledButton>GO TO PROFILE</StyledButton>
             </PersonBox>
           </StyledLink>
