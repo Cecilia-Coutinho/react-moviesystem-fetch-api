@@ -1,10 +1,8 @@
 import {
   useParams,
-  Link,
-  useNavigate
-} from "react-router-dom";
+  Link} from "react-router-dom";
 import useFetch from "./useFetch";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   Title,
   StyledButton
@@ -20,7 +18,6 @@ const PersonDetails = ({ personId }) => {
 
   const { id } = useParams();
   const { data: person, isPending: isPersonPending, error: personError } = useFetch('https://localhost:7294/api/person/' + id);
-  const navigateTo = useNavigate();
 
   const { data: genres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/PersonGenre/person?personId=${id}`);
 
