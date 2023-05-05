@@ -1,1 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap');
 
+:root {
+  --color-primary-1: #217074;
+  --color-primary-2: #37745B;
+  --color-primary-3: #EDC5AB;
+  --color-primary-4: #8B9D77;
+  --color-primary-5: #E7EAEF;
+  --color-secondary-1: #d8e87d;
+  --color-secondary-2: #FFB6C1;
+  --color-secondary-3: #6A5ACD;
+  --color-secondary-4: #FFA07A;
+  --color-secondary-5: #FFE4C4;
+  --color-font-primary: #333;
+  --font-family-1: 'Nunito', sans-serif;
+  --font-family-2: 'Lobster Two', cursive;
+}
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: var(--font-family-1);
+  color: var(--color-font-primary);
+}
+
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: auto;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--color-primary-4);
+  background-color: var(--color-primary-4);
+}
+
+.navbar h1 {
+  color: var(--color-secondary-5);
+  font-size: 30px;
+  font-family: var(--font-family-2);
+  letter-spacing: 2px;
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  color: var(--color-secondary-5);
+}
+
+.navbar a:hover {
+  color: var(--color-primary-5);
+}
+
+.content {
+  max-width: 600px;
+  margin: 15px auto;
+  padding: 20px;
+}
