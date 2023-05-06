@@ -12,9 +12,50 @@ import {
 import GenresList from "./GenresList";
 
 const StyledDetails = styled.div`
-  margin: 20px 0;
+  margin: 0 auto;
+  font-weight: 600;
+
+select {
+  width: 200px;
+  padding: 6px 10px;
+  outline: none;
+  border: 1px solid var(--color-primary-3);
+  font-size: 14px;
+  margin: 40px 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+`;
+const PStyled = styled.p`
+  margin: 40px 0 10px 0;
+  text-align: center;
+  padding: 20px 15px;
+  background-color: var(--color-primary-3);
+  color: var(--color-primary-1);
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 5px;
+`;
+
+const LabelStyled = styled.label`
+  text-align: left;
   font-weight: 600;
 `;
+
+const StyledArticle = styled.article`
+  margin: 0 auto;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 
 const PersonDetails = () => {
 
@@ -32,6 +73,12 @@ const PersonDetails = () => {
       .then(data => setGenres(data))
       .catch(error => console.log(error));
   }, []);
+
+  useEffect(() => {
+    if (genres.length > 0) {
+      setGenreId(genres[0].id);
+    }
+  }, [genres]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,7 +100,7 @@ const PersonDetails = () => {
     return (
       <div>
         <form onSubmit={handleSubmit}>
-          <label> Add New Genre: </label>
+          <LabelStyled> Add New Genre: </LabelStyled>
           <select
             value={genreId}
             onChange={(event) => setGenreId(event.target.value)}
@@ -75,7 +122,7 @@ const PersonDetails = () => {
     if (genresError) {
       return (
         <div>
-          <p>No genres found for this person.</p>
+          <PStyled>No genres found for this person.</PStyled>
           {handleGenreSelect([])}
         </div>
       );
@@ -91,7 +138,7 @@ const PersonDetails = () => {
 
     if (personGenres && personGenres.length <= 0 && (
       <div>
-        <p>No genres found for this person.</p>
+        <PStyled>No genres found for this person.</PStyled>
         {handleGenreSelect([])}
       </div>
     ))
@@ -108,14 +155,14 @@ const PersonDetails = () => {
       {isPersonPending && <div> Loading...</div>}
       {personError && <div> {personError.message}</div>}
       {person && (
-        <article>
+        <StyledArticle>
           <Title> {person.firstName} {person.lastName}</Title>
           <p>Email: {person.email}</p>
           <div>{renderGenres()}</div>
           <Link to={'/'}>
             <StyledButton>Return to Home</StyledButton>
           </Link>
-        </article>
+        </StyledArticle>
       )}
     </StyledDetails>
   );
