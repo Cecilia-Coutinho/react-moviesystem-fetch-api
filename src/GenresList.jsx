@@ -63,7 +63,6 @@ const GenresList = ({ genres, title }) => {
         );
       })}
       </GenresListContainer>
-      <StyledButton>Add New Genre</StyledButton>
     </div>
   );
 }
