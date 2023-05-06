@@ -21,7 +21,6 @@ const PersonDetails = () => {
   const [genreId, setGenreId] = useState('');
   const [isPending, setIsPending] = useState(false);
   const [genres, setGenres] = useState([]);
-  const [shouldReloadGenres, setShouldReloadGenres] = useState(false);
   const { id } = useParams();
   const { data: person, isPending: isPersonPending, error: personError } = useFetch('https://localhost:7294/api/person/' + id);
 
@@ -32,7 +31,7 @@ const PersonDetails = () => {
       .then(response => response.json())
       .then(data => setGenres(data))
       .catch(error => console.log(error));
-  }, [shouldReloadGenres]);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -46,7 +45,7 @@ const PersonDetails = () => {
     }).then(() => {
       //console.log('new task added');
       setIsPending(false);
-      setShouldReloadGenres(!shouldReloadGenres);
+      window.location.reload();
     })
   }
 
