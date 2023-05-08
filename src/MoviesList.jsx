@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   Title
 } from './PeopleList';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import MovieCard from './MovieCard';
+import { useState, useEffect } from "react";
 
 const CustomTitle = styled(Title)`
   margin-bottom: 20px;
@@ -10,36 +13,42 @@ const CustomTitle = styled(Title)`
   justify-content: center;
 `;
 
-const MoviesListContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-size: 16px;
+const CustomCarousel = styled(Carousel)`
+  font-size: 14px;
+  display: block;
+  margin: 20px 0;
+  padding: 10px;
+
+  .carousel .control-dots {
+    width: 100%;
+    position: absolute;
+    bottom: 0px 0;
+  }
+
+.carousel .control-dots .dot {
+  width: 12px;
+  height: 12px;
+  margin: 0px 5px;
+  background: var(--color-primary-1);
+}
+
+.carousel .slider-wrapper {
+    margin-bottom: 20px;
+  }
 `;
 
-const MoviesStyled = styled.div`
-  display: flex;
+const PaginationDetails = styled.div`
+  margin: 0 auto;
+  padding: 10px 10px;
+  font-weight: 600;
 `;
 
-const UlStyled = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const Tag = styled.li`
-  justify-content: center;
-  width: 120px;
-  background-color: var(--color-secondary-4);
-  color: var(--color-primary-1);
-  padding: 15px 10px;
-  border-radius: 4px;
-  margin: 8px;
-  text-align: center;
-`;
 
 const MoviesList = ({ movies, title }) => {
+  const [pagination, setPagination] = useState(0);
+  useEffect(() => {
+    setPagination(1);
+  }, [pagination]);
 
   if (movies.length <= 0) {
     return <div>
@@ -50,17 +59,22 @@ const MoviesList = ({ movies, title }) => {
   return (
     <div>
       <CustomTitle>{title}</CustomTitle>
-      <MoviesListContainer>
-        {movies.map((movie) => {
+      <CustomCarousel
+        showThumbs={false}
+        showArrows={true}
+        infiniteLoop={true}
+      >
+        {movies.map((movie, index) => {
           return (
-            <MoviesStyled key={movie.movieId}>
-              <UlStyled>
-                <Tag>{movie.movieTitle} <br /> Rating: { movie.movieRating}</Tag>
-              </UlStyled>
-            </MoviesStyled>
+            <div key={movie.movieId}>
+              <MovieCard movie={movie} />
+              <PaginationDetails>
+                <p>Showing {pagination + index} of {movies.length} items</p>
+              </PaginationDetails>
+            </div>
           );
         })}
-      </MoviesListContainer>
+      </CustomCarousel >
     </div>
   );
 }

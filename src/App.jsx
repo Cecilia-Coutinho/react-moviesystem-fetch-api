@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import NotFound from './NotFound';
 
-
 function App() {
 
   return (
