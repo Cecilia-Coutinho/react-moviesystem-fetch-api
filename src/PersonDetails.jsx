@@ -10,6 +10,7 @@ import {
   StyledButton
 } from './PeopleList';
 import GenresList from "./GenresList";
+import MoviesList from "./MoviesList";
 
 const StyledDetails = styled.div`
   margin: 0 auto;
@@ -67,6 +68,7 @@ const PersonDetails = () => {
 
   const { data: personGenres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/PersonGenre/person?personId=${id}`);
 
+
   useEffect(() => {
     fetch('https://localhost:7294/api/genre')
       .then(response => response.json())
@@ -90,7 +92,6 @@ const PersonDetails = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(genreId)
     }).then(() => {
-      //console.log('new task added');
       setIsPending(false);
       window.location.reload();
     })
@@ -142,13 +143,48 @@ const PersonDetails = () => {
         {handleGenreSelect([])}
       </div>
     ))
-    return (
-      <div>
-        <p>No genres found for this person.</p>
-        {handleGenreSelect([])}
-      </div>
-    );
+      return (
+        <div>
+          <p>No genres found for this person.</p>
+          {handleGenreSelect([])}
+        </div>
+      );
   };
+
+  const { data: personMovies, isPending: isMoviePending, error: moviesError } = useFetch(`https://localhost:7294/api/movies/${id}`);
+
+
+  const renderMovies = () => {
+    if (isMoviePending) {
+      return <div>Loading...</div>;
+    }
+    if (moviesError) {
+      return (
+        <div>
+          <PStyled>No movies found for this person.</PStyled>
+        </div>
+      );
+    }
+    if (personMovies && personMovies.length > 0) {
+      return (
+        <div>
+          <MoviesList movies={personMovies} title="Movies Preferences" />
+        </div>
+      );
+    }
+
+    if (personMovies && personMovies.length <= 0 && (
+      <div>
+        <PStyled>No movies found for this person.</PStyled>
+      </div>
+    ))
+      return (
+        <div>
+          <p>No movies found for this person.</p>
+        </div>
+      );
+  };
+
 
   return (
     <StyledDetails>
@@ -159,6 +195,7 @@ const PersonDetails = () => {
           <Title> {person.firstName} {person.lastName}</Title>
           <p>Email: {person.email}</p>
           <div>{renderGenres()}</div>
+          <div>{renderMovies()}</div>
           <Link to={'/'}>
             <StyledButton>Return to Home</StyledButton>
           </Link>
