@@ -137,28 +137,23 @@ const PersonDetails = () => {
       );
     }
 
-    if (personGenres && personGenres.length <= 0 && (
-      <div>
-        <PStyled>No genres found for this person.</PStyled>
-        {handleGenreSelect([])}
-      </div>
-    ))
+    if (personGenres && personGenres.length <= 0)
       return (
         <div>
-          <p>No genres found for this person.</p>
+          <PStyled>No genres found for this person.</PStyled>
           {handleGenreSelect([])}
         </div>
       );
   };
 
-  const { data: personMovies, isPending: isMoviePending, error: moviesError } = useFetch(`https://localhost:7294/api/movies/${id}`);
+  const { data: personMovies, isPending: isPersonMoviePending, error: personMoviesError } = useFetch(`https://localhost:7294/api/movies/${id}`);
 
 
-  const renderMovies = () => {
-    if (isMoviePending) {
+  const renderPersonMovies = () => {
+    if (isPersonMoviePending) {
       return <div>Loading...</div>;
     }
-    if (moviesError) {
+    if (personMoviesError) {
       return (
         <div>
           <PStyled>No movies found for this person.</PStyled>
@@ -173,14 +168,39 @@ const PersonDetails = () => {
       );
     }
 
-    if (personMovies && personMovies.length <= 0 && (
-      <div>
-        <PStyled>No movies found for this person.</PStyled>
-      </div>
-    ))
+    if (personMovies && personMovies.length === 0)
       return (
         <div>
-          <p>No movies found for this person.</p>
+          <PStyled>No movies found for this person.</PStyled>
+        </div>
+      );
+  };
+
+  const { data: movies, isPending: isMoviesPending, error: moviesError } = useFetch(`https://localhost:7294/api/movies`);
+
+  const renderAddMovies = () => {
+    if (isMoviesPending) {
+      return <div>Loading...</div>;
+    }
+    if (moviesError) {
+      return (
+        <div>
+          <PStyled>Oops! Something went worng...</PStyled>
+        </div>
+      );
+    }
+    if (movies && movies.length > 0) {
+      return (
+        <div>
+          <MoviesList movies={movies} title="All Movies"/>
+        </div>
+      );
+    }
+
+    if (movies && movies.length === 0)
+      return (
+        <div>
+          <PStyled>No movies found.</PStyled>
         </div>
       );
   };
@@ -195,7 +215,8 @@ const PersonDetails = () => {
           <Title> {person.firstName} {person.lastName}</Title>
           <p>Email: {person.email}</p>
           <div>{renderGenres()}</div>
-          <div>{renderMovies()}</div>
+          <div>{renderPersonMovies()}</div>
+          <div>{renderAddMovies()}</div>
           <Link to={'/'}>
             <StyledButton>Return to Home</StyledButton>
           </Link>
