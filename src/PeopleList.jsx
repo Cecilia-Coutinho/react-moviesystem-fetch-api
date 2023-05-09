@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
 import { FaUser } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
+import { useEffect, useState } from "react";
 
 const PersonPreviewStyled = styled.div`
   padding: 20px 16px;
@@ -62,32 +63,67 @@ export const StyledButton = styled.button`
 const PeopleList = ({ people, title }) => {
 
   // Sort the people array by the firstName property
-  const sortedPeople = people.sort((a, b) =>
+  const sortedPeople = people.slice().sort((a, b) =>
     a.firstName.localeCompare(b.firstName)
   );
+  const [search, setSearch] = useState('');
+  
+  const filteredSearch = search.length > 0
+    ? sortedPeople.filter(person => `${person.firstName} ${person.lastName}`
+      .toLowerCase()
+      .includes(search.toLowerCase()))
+    : []
 
   return (
     <div className="people-list">
       <Title>{title}</Title>
+      <div>
+        <input
+          name="search"
+          type="text"
+          placeholder="Search..."
+          onChange={e => setSearch(e.target.value)}
+          value={search}
+        />
+      </div>
 
       {/*
         * outputting list
         * map to get properties from the data's list initialized in Home
         */
       }
-      {sortedPeople.map((person) => (
-        <PersonPreviewStyled key={person.personId}>
-          <StyledLink to={`/person/${person.personId}`}>
-            <PersonBox>
-              <PersonTitle>
-                <PersonIcon />
-                {person.firstName} {person.lastName}
-              </PersonTitle>
-              <StyledButton>GO TO PROFILE</StyledButton>
-            </PersonBox>
-          </StyledLink>
-        </PersonPreviewStyled>
-      ))}
+      {search.length > 0 ? (
+        <div>
+          {filteredSearch.map((person) => (
+            <PersonPreviewStyled key={person.personId}>
+              <StyledLink to={`/person/${person.personId}`}>
+                <PersonBox>
+                  <PersonTitle>
+                    <PersonIcon />
+                    {person.firstName} {person.lastName}
+                  </PersonTitle>
+                  <StyledButton>GO TO PROFILE</StyledButton>
+                </PersonBox>
+              </StyledLink>
+            </PersonPreviewStyled>
+          ))}
+        </div>) : (
+          <div>
+            {sortedPeople.map((person) => (
+              <PersonPreviewStyled key={person.personId}>
+                <StyledLink to={`/person/${person.personId}`}>
+                  <PersonBox>
+                    <PersonTitle>
+                      <PersonIcon />
+                      {person.firstName} {person.lastName}
+                    </PersonTitle>
+                    <StyledButton>GO TO PROFILE</StyledButton>
+                  </PersonBox>
+                </StyledLink>
+              </PersonPreviewStyled>
+            ))}
+          </div>
+        )}
     </div>
   );
 }
