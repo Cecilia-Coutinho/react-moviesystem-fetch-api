@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useFetch from "./useFetch"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import {
   Title,
@@ -122,7 +122,14 @@ const CreatePerson = () => {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        {!isPending && <StyledButton>Add Person</StyledButton>}
+        {!isPending && (
+          <>
+            <StyledButton type="submit">Add Person</StyledButton>
+            <Link to="/">
+              <StyledButton>Return to Home</StyledButton>
+            </Link>
+          </>
+        )}
         {isPending && <StyledButton disabled>Adding Person...</StyledButton>}
       </form>
     </CreatePersonForm>
