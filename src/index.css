@@ -52,7 +52,7 @@
   color: var(--color-secondary-5);
 }
 
-.navbar a:hover {
+.links a:hover {
   color: var(--color-primary-5);
 }
 
