@@ -43,14 +43,6 @@ const PaginationDetails = styled.div`
   font-weight: 600;
 `;
 
-const styles = {
-  root: {
-    // your custom styles for the PersonList component
-    // ...
-  },
-};
-
-
 const MoviesList = ({ movies, title, showOverviewCondition}) => {
   const [pagination, setPagination] = useState(0);
   useEffect(() => {
