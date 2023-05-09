@@ -11,7 +11,6 @@ const Card = styled.div`
   padding: 10px;
   border: 1px solid var(--color-primary-3);
   border-radius: 5px;
-}
 `;
 
 const ImageWrapper = styled.div`
@@ -48,21 +47,23 @@ const Rating = styled.p`
   color: var(--color-font-primary);
 `;
 
-const MovieCard = ({ movie }) => {
-  const { title, overview, posterPathTMDB, rating } = movie;
-  const POSTER_PREFIX = "https://image.tmdb.org/t/p/original";
+export const POSTER_PREFIX = "https://image.tmdb.org/t/p/original";
+
+const MovieCard = ({ movie, showOverview }) => {
+  const { movieTitle, overview, posterPathTMDB, movieRating } = movie;
+
 
   return (
     <Card>
       <ImageWrapper>
         <Image
           src={POSTER_PREFIX + posterPathTMDB}
-          alt={`Poster for ${movie.movieTitle}`}
+          alt={`Poster for ${movieTitle}`}
         />
       </ImageWrapper>
-      <Title>{movie.movieTitle}</Title>
-      <Overview>{movie.overview}</Overview>
-      <Rating>Rating: {movie.movieRating}</Rating>
+      <Title>{movieTitle}</Title>
+      {showOverview && <Overview>{overview}</Overview>}
+      <Rating>Rating: {movieRating}</Rating>
     </Card>
   );
 };

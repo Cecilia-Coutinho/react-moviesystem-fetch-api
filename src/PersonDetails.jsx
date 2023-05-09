@@ -12,6 +12,7 @@ import {
 import GenresList from "./GenresList";
 import MoviesList from "./MoviesList";
 
+
 const StyledDetails = styled.div`
   margin: 0 auto;
   font-weight: 600;
@@ -56,6 +57,7 @@ const StyledArticle = styled.article`
   justify-content: center;
   align-items: center;
 `;
+
 
 
 const PersonDetails = () => {
@@ -163,7 +165,7 @@ const PersonDetails = () => {
     if (personMovies && personMovies.length > 0) {
       return (
         <div>
-          <MoviesList movies={personMovies} title="Movies Preferences" />
+          <MoviesList movies={personMovies} title="Movies Preferences" showOverviewCondition={true} />
         </div>
       );
     }
@@ -192,10 +194,25 @@ const PersonDetails = () => {
     if (movies && movies.length > 0) {
       return (
         <div>
-          <MoviesList movies={movies} title="All Movies"/>
+          //re render with the following props
+          <MoviesList movies={movies} title="All Movies" showOverviewCondition={false} />
         </div>
+       /*  <div>
+          <CustomTitle>All Movies</CustomTitle>
+          {movies.map((movie) => (
+            <MovieCard
+              movie={movie}
+              key={movie.movieId}
+              movieTitle={movie.title}
+              movieRating={movie.rating}
+              posterPathTMDB={POSTER_PREFIX + movie.posterPathTMDB}
+              showOverview={false}
+            />
+          ))}
+        </div> */
       );
     }
+
 
     if (movies && movies.length === 0)
       return (

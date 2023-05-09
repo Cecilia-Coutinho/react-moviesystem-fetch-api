@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import {
   Title
 } from './PeopleList';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import MovieCard from './MovieCard';
 import { useState, useEffect } from "react";
 
-const CustomTitle = styled(Title)`
+export const CustomTitle = styled(Title)`
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -43,33 +43,45 @@ const PaginationDetails = styled.div`
   font-weight: 600;
 `;
 
+const styles = {
+  root: {
+    // your custom styles for the PersonList component
+    // ...
+  },
+};
 
-const MoviesList = ({ movies, title }) => {
+
+const MoviesList = ({ movies, title, showOverviewCondition}) => {
   const [pagination, setPagination] = useState(0);
   useEffect(() => {
     setPagination(1);
   }, [pagination]);
 
+
   return (
-    <div>
-      <CustomTitle>{title}</CustomTitle>
-      <CustomCarousel
-        showThumbs={false}
-        showArrows={true}
-        infiniteLoop={true}
-      >
-        {movies.map((movie, index) => {
-          return (
-            <div key={movie.movieId}>
-              <MovieCard movie={movie} />
-              <PaginationDetails>
-                <p>Showing {pagination + index} of {movies.length} items</p>
-              </PaginationDetails>
-            </div>
-          );
-        })}
-      </CustomCarousel >
-    </div>
+
+      <div>
+        <CustomTitle>{title}</CustomTitle>
+        <CustomCarousel
+          showThumbs={false}
+          showArrows={true}
+          infiniteLoop={true}
+          autoPlay={true}
+          interval={8000}
+          showIndicators={true}
+        >
+          {movies.map((movie, index) => {
+            return (
+              <div key={movie.movieId}>
+                <MovieCard movie={movie} showOverview={showOverviewCondition}/>
+                <PaginationDetails>
+                  <p>Showing {pagination + index} of {movies.length} items</p>
+                </PaginationDetails>
+              </div>
+            );
+          })}
+        </CustomCarousel >
+      </div>
   );
 }
 
