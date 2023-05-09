@@ -50,12 +50,6 @@ const MoviesList = ({ movies, title }) => {
     setPagination(1);
   }, [pagination]);
 
-  if (movies.length <= 0) {
-    return <div>
-      <CustomTitle>{title}</CustomTitle>
-      <p>No movies found for this person.</p>
-    </div>;
-  }
   return (
     <div>
       <CustomTitle>{title}</CustomTitle>
