@@ -63,7 +63,7 @@ const PeopleList = ({ people, title }) => {
 
   // Sort the people array by the firstName property
   const sortedPeople = people.sort((a, b) =>
-    a.lastName.localeCompare(b.firstName)
+    a.firstName.localeCompare(b.firstName)
   );
 
   return (

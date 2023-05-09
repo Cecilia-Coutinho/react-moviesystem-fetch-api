@@ -64,7 +64,6 @@ const CreatePerson = () => {
 
     const isValid = validateEmail(email);
     setIsEmailValid(isValid);
-    setErrorMessage('You are writing an invalid email address!');
 
     setIsPending(true);
     if (isValid) {
@@ -72,18 +71,30 @@ const CreatePerson = () => {
 
       createNewPerson(newPerson)
         .then((response) => {
+          if (response.ok || response.status === undefined) {
             setIsPending(false);
             setCreateResult(true);
             navigateTo('/');
+          } else {
+            setIsPending(false);
+            setCreateResult(false);
+          }
         })
+        .catch(() => {
+          setIsPending(false);
+          setCreateResult(false);
+        })
+    } else {
+      setIsPending(false);
+      setErrorMessage('You are writing an invalid email address!');
     }
   };
 
   return (
     <CreatePersonForm>
       <CustomTitle>Create Person</CustomTitle>
-      {createResult !== null && (
-        <ErrMsgStyled>{createResult ? 'Person created successfully' : 'Failed to create person'}</ErrMsgStyled>
+      {createResult !== null && !createResult && (
+        <ErrMsgStyled>Failed to create person: Email unavailable</ErrMsgStyled>
       )}
       {errorMessage && <ErrMsgStyled>{errorMessage}</ErrMsgStyled>}
 
