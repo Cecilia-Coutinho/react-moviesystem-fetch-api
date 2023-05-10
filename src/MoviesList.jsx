@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import MovieCard from './MovieCard';
 import { useState, useEffect } from 'react';
+import Modal from './Modal';
 
 
 const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieCondition }) => {
@@ -11,6 +12,8 @@ const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieConditio
   useEffect(() => {
     setPagination(1);
   }, [pagination]);
+
+  const [openModal, setOpenModal] = useState(false);
 
   return (
 
@@ -39,6 +42,24 @@ const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieConditio
           );
         })}
       </CustomCarousel >
+      <ModalButton>
+        <button onClick={() => setOpenModal(true)}>
+          SEE ALL
+        </button>
+      </ModalButton>
+      <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
+        {movies.map((movie, index) => {
+          return (
+            <div key={movie.movieId}>
+              <MovieCard
+                movie={movie}
+                showOverview={true}
+                showAddMovie={showAddMovieCondition}
+              />
+            </div>
+          );
+        })}
+      </Modal>
     </CarouselContainer>
   );
 }
@@ -58,6 +79,11 @@ const CarouselContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
+const ModalButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 const CustomCarousel = styled(Carousel)`
   font-size: 14px;
