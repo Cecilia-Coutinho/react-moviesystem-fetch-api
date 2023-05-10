@@ -5,9 +5,10 @@ import {
 } from './PeopleList';
 
 const CustomTitle = styled(Title)`
-  margin-bottom: 20px;
   display: flex;
   justify-content: center;
+  background-color:unset;
+  margin: 0 auto;
 `;
 
 const GenresListContainer = styled.div`
@@ -16,6 +17,8 @@ const GenresListContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   font-size: 14px;
+  max-width: 600px;
+  margin 0 auto;
 `;
 
 const GenresStyled = styled.div`

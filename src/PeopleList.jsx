@@ -17,11 +17,14 @@ const PersonPreviewStyled = styled.div`
 `;
 
 export const Title = styled.h2`
-  margin-top: 40px;
+  margin: 40px 0 20px 0;
   display: flex;
   align-items: center;
   justify-content: left;
   color: var(--color-primary-1);
+    background-color: var(--color-primary-5);
+    padding: 10px 25px;
+      border-radius: 5px;
 `;
 
 const PersonBox = styled.div`
@@ -67,7 +70,7 @@ const PeopleList = ({ people, title }) => {
     a.firstName.localeCompare(b.firstName)
   );
   const [search, setSearch] = useState('');
-  
+
   const filteredSearch = search.length > 0
     ? sortedPeople.filter(person => `${person.firstName} ${person.lastName}`
       .toLowerCase()
@@ -75,7 +78,7 @@ const PeopleList = ({ people, title }) => {
     : []
 
   return (
-    <div className="people-list">
+    <div className="people-list" style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
       <Title>{title}</Title>
       <div>
         <input

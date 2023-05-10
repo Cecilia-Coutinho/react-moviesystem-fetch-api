@@ -12,52 +12,6 @@ import {
 import GenresList from "./GenresList";
 import MoviesList from "./MoviesList";
 
-const StyledDetails = styled.div`
-  margin: 0 auto;
-  font-weight: 600;
-
-select {
-  width: 200px;
-  padding: 6px 10px;
-  outline: none;
-  border: 1px solid var(--color-primary-3);
-  font-size: 14px;
-  margin: 40px 10px;
-}
-
-form {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-`;
-const PStyled = styled.p`
-  margin: 40px 0 10px 0;
-  text-align: center;
-  padding: 20px 15px;
-  background-color: var(--color-primary-3);
-  color: var(--color-primary-1);
-  font-size: 18px;
-  font-weight: 400;
-  border-radius: 5px;
-`;
-
-const LabelStyled = styled.label`
-  text-align: left;
-  font-weight: 600;
-`;
-
-const StyledArticle = styled.article`
-  margin: 0 auto;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-
 
 const PersonDetails = () => {
 
@@ -67,7 +21,7 @@ const PersonDetails = () => {
   const { id } = useParams();
   const { data: person, isPending: isPersonPending, error: personError } = useFetch('https://localhost:7294/api/person/' + id);
 
-  const { data: personGenres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/PersonGenre/person?personId=${id}`);
+  const { data: personGenres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/personGenre/person?personId=${id}`);
 
 
   useEffect(() => {
@@ -124,7 +78,7 @@ const PersonDetails = () => {
     if (genresError) {
       return (
         <div>
-          <PStyled>No genres found for this person.</PStyled>
+          <p>No genres found for this person.</p>
           {handleGenreSelect([])}
         </div>
       );
@@ -138,10 +92,15 @@ const PersonDetails = () => {
       );
     }
 
-    if (personGenres && personGenres.length <= 0)
+    if (personGenres && personGenres.length <= 0 && (
+      <div>
+        <p>No genres found for this person.</p>
+        {handleGenreSelect([])}
+      </div>
+    ))
       return (
         <div>
-          <PStyled>No genres found for this person.</PStyled>
+          <p>No genres found for this person.</p>
           {handleGenreSelect([])}
         </div>
       );
@@ -164,7 +123,7 @@ const PersonDetails = () => {
     if (personMovies && personMovies.length > 0) {
       return (
         <div>
-          <MoviesList movies={personMovies} title="Movies Preferences" showOverviewCondition={true}/>
+          <MoviesList movies={personMovies} title="Movies Preferences" showOverviewCondition={false}/>
         </div>
       );
     }
@@ -193,7 +152,6 @@ const PersonDetails = () => {
     if (movies && movies.length > 0) {
       return (
         <div>
-          //re render with the following props
           <MoviesList movies={movies} title="All Movies" showOverviewCondition={false}/>
         </div>
       );
@@ -217,7 +175,7 @@ const PersonDetails = () => {
         <StyledArticle>
           <Title> {person.firstName} {person.lastName}</Title>
           <p>Email: {person.email}</p>
-          <div>{renderGenres()}</div>
+          <StyledGenresBox>{renderGenres()}</StyledGenresBox>
           <div>{renderPersonMovies()}</div>
           <div>{renderAddMovies()}</div>
           <Link to={'/'}>
@@ -230,3 +188,77 @@ const PersonDetails = () => {
 }
 
 export default PersonDetails;
+
+const StyledDetails = styled.div`
+  margin: 0 auto;
+  font-weight: 600;
+
+
+  /* solid background */
+    background: rgb(0, 212, 255);
+
+    /* gradient background*/
+    background: linear-gradient(45deg, rgba(0, 212, 255, 1) 0%, rgba(11, 3, 45, 1) 100%);
+
+    filter: brightness(100%) grayscale(30%);
+
+    /* photo background */
+    background-image: url(https://images.unsplash.com/photo-1478720568477-152d9b164e26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDY2OTl8MHwxfGFsbHx8fHx8fHx8fDE2ODM3MTE3OTc&ixlib=rb-4.0.3&q=80&w=1080);
+    background-size: cover;
+    background-position: center;
+
+  select {
+    width: 200px;
+    padding: 6px 10px;
+    outline: none;
+    border: 1px solid var(--color-primary-3);
+    font-size: 14px;
+    margin: 40px 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+      color: var(--color-primary-5);
+  }
+`;
+const PStyled = styled.p`
+  margin: 40px 0 10px 0;
+  text-align: center;
+  padding: 20px 15px;
+  background-color: var(--color-primary-3);
+  color: var(--color-primary-1);
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 5px;
+`;
+
+const LabelStyled = styled.label`
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-font-primary);
+`;
+
+const StyledArticle = styled.article`
+  margin: 0 auto;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+
+const StyledGenresBox = styled.div`
+  background-color: var(--color-primary-5);
+    background-color: rgba(231, 234, 239, 0.8);
+    width: 100%;
+  padding: 10px 25px;
+  margin-top: 30px;
+`;
+

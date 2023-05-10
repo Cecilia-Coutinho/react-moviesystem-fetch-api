@@ -57,7 +57,19 @@
 }
 
 .content {
-  max-width: 600px;
-  margin: 15px auto;
-  padding: 20px;
+  margin: 0 auto;
+}
+
+/* carousel styles */
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.carousel-item {
+  position: relative;
+  min-height: 1px;
+  float: left;
 }
