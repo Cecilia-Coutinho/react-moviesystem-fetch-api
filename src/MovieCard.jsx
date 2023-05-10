@@ -1,9 +1,51 @@
 import React from 'react';
 import styled from 'styled-components';
+import {
+  useParams
+} from "react-router-dom";
+import { useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
 
-const MovieCard = ({ movie, showOverview }) => {
+const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
   const { movieTitle, overview, posterPathTMDB, movieRating } = movie;
+  const [movieId, setMovieId] = useState('');
+  const [isPending, setIsPending] = useState(false);
+  const { id } = useParams();
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setIsPending(true);
+
+    //https://localhost:7294/api/PersonMovie/person/1/movie/93
+
+    fetch(`https://localhost:7294/api/PersonMovie/person/${id}/movie/${movie.movieId}`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(movie.movieId)
+    }).then(() => {
+      setIsPending(false);
+
+      //TODO: check other solution to avoid window.location.reload
+      window.location.reload();
+    })
+  }
+
+  const handleAddMovie = () => {
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <button
+            type='submit'
+            value={movie.movieId}
+            onClick={(event) => setMovieId(event.target.value)}
+          >
+            <PlusButton />
+          </button>
+        </form>
+      </div>
+    );
+  };
 
   return (
     <ImageWrapper>
@@ -18,8 +60,12 @@ const MovieCard = ({ movie, showOverview }) => {
           <Title>{movieTitle}</Title>
           {showOverview && <Overview>{overview}</Overview>}
           <p>Rating: {movieRating}</p>
-                </div>
-            </div>
+        </div>
+        {showAddMovie && <div>{handleAddMovie([])}</div>}
+      </div>
+      <form action="submit">
+        <button></button>
+      </form>
 
     </ImageWrapper>
 /*     <div>
@@ -38,17 +84,11 @@ const MovieCard = ({ movie, showOverview }) => {
 
 export default MovieCard;
 
-
-
-const Card = styled.div`
-  max-width: 600px;
-  width: 100%;
-  object-fit: contain;
-  align-items: center;
-  margin: 0 auto;
-  padding: 10px;
-  border: 1px solid var(--color-primary-3);
-  border-radius: 5px;
+const PlusButton = styled(FaPlus)`
+  margin: 1px;
+  font-size: 16px;
+  color: var(--color-primary-1);
+  background-color: var(--color-secondary-5);
 `;
 
 const ImageWrapper = styled.section`
@@ -98,6 +138,12 @@ const ImageWrapper = styled.section`
     font-size: 12px;
     line-height: 15px;
     letter-spacing: 2px;
+  }
+  button {
+      background-color: var(--color-secondary-5);
+      margin-top: 10px;
+      border-radius: 2px;
+      border: none;
   }
 `;
 

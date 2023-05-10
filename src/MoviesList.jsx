@@ -2,13 +2,19 @@ import styled from 'styled-components';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import MovieCard from './MovieCard';
+import { useState, useEffect } from 'react';
 
 
-const MoviesList = ({ movies, title, showOverviewCondition}) => {
+const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieCondition }) => {
+
+  const [pagination, setPagination] = useState(0);
+  useEffect(() => {
+    setPagination(1);
+  }, [pagination]);
 
   return (
 
-    <div>
+    <CarouselContainer>
       <CustomTitle>{title}</CustomTitle>
       <CustomCarousel
         showThumbs={false}
@@ -18,37 +24,45 @@ const MoviesList = ({ movies, title, showOverviewCondition}) => {
         interval={8000}
         showIndicators={true}
       >
-          {movies.map((movie) => {
-            return (
+        {movies.map((movie, index) => {
+          return (
+            <div key={movie.movieId}>
               <MovieCard
-                key={movie.movieId}
                 movie={movie}
                 showOverview={showOverviewCondition}
+                showAddMovie={showAddMovieCondition}
               />
-            );
-          })}
-
+              <PaginationDetails>
+                <p>Showing {pagination + index} of {movies.length} items</p>
+              </PaginationDetails>
+            </div>
+          );
+        })}
       </CustomCarousel >
-      </div>
+    </CarouselContainer>
   );
 }
 
 export default MoviesList;
 
 export const CustomTitle = styled.h2`
-  margin: 40px 0 20px 0;
+  margin: 0px 0 20px 0;
   color: var(--color-primary-5);
-  background-color: rgba(0, 0, 0, 0.3);
   font-size: 30px;
-  padding: 10px 5px;
+  padding: 40px 5px 10px 5px;
   display: flex;
   justify-content: center;
 `;
 
+const CarouselContainer = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+`;
+
+
 const CustomCarousel = styled(Carousel)`
   font-size: 14px;
   display: block;
-  margin: 20px 0;
+  margin: 0 auto;
   padding: 10px;
 
   .carousel .control-dots {
@@ -100,5 +114,4 @@ const responsive = {
     slidesToSlide: 1,
   },
 };
-
 

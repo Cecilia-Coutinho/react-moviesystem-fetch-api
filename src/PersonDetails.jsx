@@ -48,6 +48,8 @@ const PersonDetails = () => {
       body: JSON.stringify(genreId)
     }).then(() => {
       setIsPending(false);
+
+      //TODO: check other solution to avoid window.location.reload
       window.location.reload();
     })
   }
@@ -123,7 +125,9 @@ const PersonDetails = () => {
     if (personMovies && personMovies.length > 0) {
       return (
         <div>
-          <MoviesList movies={personMovies} title="Movies Preferences" showOverviewCondition={false}/>
+          <MoviesList movies={personMovies} title="Movies Preferences" showOverviewCondition={false}
+          showAddMovieCondition={false}
+          />
         </div>
       );
     }
@@ -152,7 +156,7 @@ const PersonDetails = () => {
     if (movies && movies.length > 0) {
       return (
         <div>
-          <MoviesList movies={movies} title="All Movies" showOverviewCondition={false}/>
+          <MoviesList movies={movies} title="All Movies" showOverviewCondition={false} showAddMovieCondition={true} />
         </div>
       );
     }
