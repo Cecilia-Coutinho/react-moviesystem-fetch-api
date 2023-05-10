@@ -87,7 +87,6 @@ const ModalButton = styled.div`
 
 const CustomCarousel = styled(Carousel)`
   font-size: 14px;
-  display: block;
   margin: 0 auto;
   padding: 10px;
 

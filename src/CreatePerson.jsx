@@ -52,7 +52,7 @@ const CreatePerson = () => {
   const navigateTo = useNavigate();
 
   const validateEmail = (mail) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(String(mail).toLocaleLowerCase())) {
       return true;
     } else {
       return false;
