@@ -111,7 +111,7 @@ const PersonDetails = () => {
 
   const renderPersonMovies = () => {
     if (isPersonMoviePending) {
-      return <div>Loading...</div>;
+      return <div style={{ color: "var(--color-primary-5)" }}>Loading...</div>;
     }
     if (personMoviesError) {
       return (
@@ -140,12 +140,12 @@ const PersonDetails = () => {
 
   const renderAddMovies = () => {
     if (isMoviesPending) {
-      return <div>Loading...</div>;
+      return <div style={{ color: "var(--color-primary-5)" }}>Loading...</div>;
     }
     if (moviesError) {
       return (
         <div>
-          <PStyled>Oops! Something went worng...</PStyled>
+          <PStyled>Oops! Something went wrong...</PStyled>
         </div>
       );
     }
