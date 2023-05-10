@@ -9,8 +9,6 @@ import {
   Route
 } from "react-router-dom";
 import NotFound from './NotFound';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 
 function App() {
 
