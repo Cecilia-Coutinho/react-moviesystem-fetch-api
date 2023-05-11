@@ -80,7 +80,6 @@ export const CustomTitle = styled.h2`
 `;
 
 const CarouselContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   justify-content:center;

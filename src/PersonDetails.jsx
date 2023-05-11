@@ -249,6 +249,7 @@ const LabelStyled = styled.label`
 `;
 
 const StyledArticle = styled.article`
+  background-color: rgba(0, 0, 0, 0.3);
   margin: 0 auto;
   font-weight: 600;
   display: flex;
