@@ -11,47 +11,17 @@ import {
 } from './PeopleList';
 import MoviesList from "./MoviesList";
 import PersonGenres from "./PersonGenres";
+import PersonMovies from "./PersonMovies";
+import {
+  PStyled
+} from "./PersonMovies";
 
 const PersonDetails = () => {
-
-
   const [isPending, setIsPending] = useState(false);
   const { id } = useParams();
   const { data: person, isPending: isPersonPending, error: personError } = useFetch('https://localhost:7294/api/person/' + id);
 
-
-  const { data: personMovies, isPending: isPersonMoviePending, error: personMoviesError } = useFetch(`https://localhost:7294/api/movies/${id}`);
-
-
-  const renderPersonMovies = () => {
-    if (isPersonMoviePending) {
-      return <div style={{ color: "var(--color-primary-5)" }}>Loading...</div>;
-    }
-    if (personMoviesError) {
-      return (
-        <div>
-          <PStyled>No movies found for this person.</PStyled>
-        </div>
-      );
-    }
-    if (personMovies && personMovies.length > 0) {
-      return (
-        <div>
-          <MoviesList movies={personMovies} title="Movies Preferences" showOverviewCondition={false}
-          showAddMovieCondition={false}
-          />
-        </div>
-      );
-    }
-
-    if (personMovies && personMovies.length === 0)
-      return (
-        <div>
-          <PStyled>No movies found for this person.</PStyled>
-        </div>
-      );
-  };
-
+  
   const { data: movies, isPending: isMoviesPending, error: moviesError } = useFetch(`https://localhost:7294/api/movies`);
 
   const renderAddMovies = () => {
@@ -93,7 +63,9 @@ const PersonDetails = () => {
           <StyledGenresBox>
             <PersonGenres setIsPending={setIsPending} id={id} />
           </StyledGenresBox>
-          <div>{renderPersonMovies()}</div>
+          <div>
+          <PersonMovies id={id} />
+          </div>
           <div>{renderAddMovies()}</div>
           <Link to={'/'}>
             <StyledButton>Return to Home</StyledButton>
@@ -143,16 +115,6 @@ const StyledDetails = styled.div`
   p {
       color: var(--color-primary-5);
   }
-`;
-const PStyled = styled.p`
-  margin: 40px 0 10px 0;
-  text-align: center;
-  padding: 20px 15px;
-  background-color: var(--color-primary-3);
-  color: var(--color-primary-1);
-  font-size: 18px;
-  font-weight: 400;
-  border-radius: 5px;
 `;
 
 const StyledArticle = styled.article`
