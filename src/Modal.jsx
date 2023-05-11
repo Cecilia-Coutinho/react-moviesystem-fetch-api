@@ -16,10 +16,8 @@ const Modal = ({isOpen, setModalOpen, children}) => {
           </CloseButton>
         </ModalStyle>
       </BackgroundStyle>
-
     );
   }
-
 }
 
 export default Modal;

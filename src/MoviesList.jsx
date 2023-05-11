@@ -1,19 +1,23 @@
+import React from 'react';
 import styled from 'styled-components';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import MovieCard from './MovieCard';
 import { useState, useEffect } from 'react';
 import Modal from './Modal';
+import {
+  StyledButton
+} from './PeopleList';
 
 
 const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieCondition }) => {
+
+  const [openModal, setOpenModal] = useState(false);
 
   const [pagination, setPagination] = useState(0);
   useEffect(() => {
     setPagination(1);
   }, [pagination]);
-
-  const [openModal, setOpenModal] = useState(false);
 
   return (
 
@@ -36,16 +40,16 @@ const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieConditio
                 showAddMovie={showAddMovieCondition}
               />
               <PaginationDetails>
-                <p>Showing {pagination + index} of {movies.length} items</p>
+                <p>Showing {pagination} of {movies.length} items</p>
               </PaginationDetails>
             </div>
           );
         })}
       </CustomCarousel >
       <ModalButton>
-        <button onClick={() => setOpenModal(true)}>
+        <Button onClick={() => setOpenModal(true)}>
           SEE ALL
-        </button>
+        </Button>
       </ModalButton>
       <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
         {movies.map((movie, index) => {
@@ -77,6 +81,14 @@ export const CustomTitle = styled.h2`
 
 const CarouselContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+`;
+
+const Button = styled(StyledButton)`
+  width: 150px;
 `;
 
 const ModalButton = styled.div`

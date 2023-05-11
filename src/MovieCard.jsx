@@ -63,22 +63,9 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
         </div>
         {showAddMovie && <div>{handleAddMovie([])}</div>}
       </div>
-      <form action="submit">
-        <button></button>
-      </form>
+
 
     </ImageWrapper>
-/*     <div>
-      <ImageWrapper>
-        <Image
-          src={POSTER_PREFIX + posterPathTMDB}
-          alt={`Poster for ${movieTitle}`}
-        />
-      </ImageWrapper>
-      <h3>{movieTitle}</h3>
-      {showOverview && <Overview>{overview}</Overview>}
-      <p>Rating: {movieRating}</p>
-    </div> */
   );
 };
 
@@ -107,29 +94,23 @@ const ImageWrapper = styled.section`
     align-items: center;
     justify-content:center;
     text-align: center;
-      max-width: 220px;
-  width: 100%;
-  object-fit: contain;
-  margin: 0 auto;
-  padding: 10px;
-  border: 1px solid var(--color-primary-3);
-  border-radius: 5px;
+    max-width: 230px;
+    width: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid var(--color-primary-3);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
   }
 
   .banner-image {
-    height: 300px;
     border-radius: 12px;
     border: 1px solid rgba(255,255,255, 0.255)
-    overflow:hidden;
-  position: relative;
-  height: 100%;
-  object-fit: contain;
-  }
-
-  h1 {
-    color: rgba(255,255,255,0.98);
-    text-transform: uppercase;
-    font-size: 22px;
+    position: relative;
+    width: 200px;
+    height:300px;
   }
 
   p {
@@ -145,6 +126,13 @@ const ImageWrapper = styled.section`
       border-radius: 2px;
       border: none;
   }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Image = styled.img`
@@ -152,10 +140,11 @@ const Image = styled.img`
 `;
 
 const Title = styled.h3`
+  margin: 20px 0px;
   font-size: 18px;
   font-weight: bold;
-  margin: 20px 0px;
   color: var(--color-primary-3);
+  text-transform: uppercase;
 `;
 
 const Overview = styled.p`
