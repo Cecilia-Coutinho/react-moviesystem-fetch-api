@@ -1,6 +1,9 @@
 import MoviesList from "./MoviesList";
 import useFetch from "./useFetch";
 import styled from 'styled-components';
+import {
+  CustomTitle
+} from './MoviesList';
 
 const PersonMovies = ({ id }) => {
 
@@ -12,6 +15,7 @@ if (isPersonMoviePending) {
     if (personMoviesError) {
       return (
         <div>
+          <CustomTitle>Movies Preferences</CustomTitle>
           <PStyled>No movies found for this person.</PStyled>
         </div>
       );
@@ -29,6 +33,7 @@ if (isPersonMoviePending) {
     if (personMovies && personMovies.length === 0)
       return (
         <div>
+          <CustomTitle>Movies Preferences</CustomTitle>
           <PStyled>No movies found for this person.</PStyled>
         </div>
       );

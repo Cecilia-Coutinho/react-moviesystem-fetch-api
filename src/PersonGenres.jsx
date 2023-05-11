@@ -5,6 +5,7 @@ import useFetch from "./useFetch";
 import {
   PStyled
 } from "./PersonMovies";
+import styled from "styled-components";
 
 const PersonGenres = ({ setIsPending, id }) => {
   const [genres, setGenres] = useState([]);
@@ -34,7 +35,7 @@ const PersonGenres = ({ setIsPending, id }) => {
   if (genresError) {
     return (
       <div>
-        <PStyled>No genres found for this person.</PStyled>
+        <P>No genres found for this person.</P>
         <GenreSelectionForm
           genres={genres}
           setGenres={setGenres}
@@ -60,7 +61,7 @@ const PersonGenres = ({ setIsPending, id }) => {
 
   if (personGenres && personGenres.length <= 0 && (
     <div>
-      <PStyled>No genres found for this person.</PStyled>
+      <P>No genres found for this person.</P>
       <GenreSelectionForm
         genres={genres}
         setGenres={setGenres}
@@ -71,7 +72,7 @@ const PersonGenres = ({ setIsPending, id }) => {
   ))
     return (
       <div>
-        <PStyled>No genres found for this person.</PStyled>
+        <P>No genres found for this person.</P>
         <GenreSelectionForm
           genres={genres}
           setGenres={setGenres}
@@ -85,3 +86,7 @@ const PersonGenres = ({ setIsPending, id }) => {
 }
 
 export default PersonGenres;
+
+const P = styled(PStyled)`
+background-color: transparent;
+`;

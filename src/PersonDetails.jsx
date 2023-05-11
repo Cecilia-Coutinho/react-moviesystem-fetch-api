@@ -25,7 +25,7 @@ const PersonDetails = () => {
       {person && (
         <StyledArticle>
           <Title> {person.firstName} {person.lastName}</Title>
-          <p>Email: {person.email}</p>
+          <Email>Email: {person.email}</Email>
           <StyledGenresBox>
             <PersonGenres setIsPending={setIsPending} id={id} />
           </StyledGenresBox>
@@ -93,4 +93,9 @@ const StyledGenresBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const Email = styled.p`
+color: var(--color-primary-5);
+font-weight: 400;
+`
 
