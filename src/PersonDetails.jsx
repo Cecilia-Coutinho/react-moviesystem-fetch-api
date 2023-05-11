@@ -2,19 +2,15 @@ import {
   useParams,
   Link
 } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import useFetch from "./useFetch";
 import styled from 'styled-components';
 import {
   Title,
   StyledButton
 } from './PeopleList';
-import MoviesList from "./MoviesList";
 import PersonGenres from "./PersonGenres";
 import PersonMovies from "./PersonMovies";
-import {
-  PStyled
-} from "./PersonMovies";
 import AddPersonMovie from "./AddPersonMovie";
 
 const PersonDetails = () => {
@@ -54,19 +50,18 @@ const StyledDetails = styled.div`
   margin: 0 auto;
   font-weight: 600;
 
-
   /* solid background */
-    background: rgb(0, 212, 255);
+  background: rgb(0, 212, 255);
 
-    /* gradient background*/
-    background: linear-gradient(45deg, rgba(0, 212, 255, 1) 0%, rgba(11, 3, 45, 1) 100%);
+  /* gradient background*/
+  background: linear-gradient(45deg, rgba(0, 212, 255, 1) 0%, rgba(11, 3, 45, 1) 100%);
 
-    filter: brightness(100%) grayscale(30%);
+  filter: brightness(100%) grayscale(30%);
 
-    /* photo background */
-    background-image: url(https://images.unsplash.com/photo-1478720568477-152d9b164e26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDY2OTl8MHwxfGFsbHx8fHx8fHx8fDE2ODM3MTE3OTc&ixlib=rb-4.0.3&q=80&w=1080);
-    background-size: cover;
-    background-position: center;
+  /* photo background */
+  background-image: url(https://images.unsplash.com/photo-1478720568477-152d9b164e26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw0NDY2OTl8MHwxfGFsbHx8fHx8fHx8fDE2ODM3MTE3OTc&ixlib=rb-4.0.3&q=80&w=1080);
+  background-size: cover;
+  background-position: center;
 
   select {
     width: 200px;
@@ -98,7 +93,6 @@ const StyledArticle = styled.article`
   justify-content: center;
   align-items: center;
 `;
-
 
 const StyledGenresBox = styled.div`
   background-color: var(--color-primary-5);
