@@ -3,29 +3,15 @@ import styled from 'styled-components';
 import {
   useParams
 } from "react-router-dom";
-import { useState, useEffect } from 'react';
-import { Rating } from 'react-simple-star-rating';
+import { useState} from 'react';
 import AddNewMovie from './AddNewMovie';
+import AddMovieRating from './AddMovieRating';
 
 const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
   const { movieTitle, overview, posterPathTMDB, movieRating } = movie;
 
   const [isPending, setIsPending] = useState(false);
   const { id } = useParams();
-
-  const handleRatingSubmit = (personRating) => {
-    setIsPending(true);
-
-    fetch(`https://localhost:7294/api/PersonMovie/movierating?personId=${id}&movieId=${movie.movieId}`, {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(personRating)
-    }).then(() => {
-      setIsPending(false);
-      //FIXME: check other solution to avoid window.location.reload as a hack
-      window.location.reload();
-    })
-  }
 
   return (
     <ImageWrapper>
@@ -39,12 +25,7 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
           </div>
           <Title>{movieTitle}</Title>
           {showOverview && <Overview>{overview}</Overview>}
-          <Rating
-            iconsCount={5}
-            initialValue={movieRating}
-            allowFraction size={15}
-            onClick={(personRating) =>
-            handleRatingSubmit(personRating)} />
+          <AddMovieRating movie={movie} id={id} setIsPending={setIsPending}></AddMovieRating>
         </div>
         {showAddMovie && <div>
           <AddNewMovie movie={ movie} setIsPending={setIsPending} id={id} />
