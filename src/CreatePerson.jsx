@@ -7,39 +7,6 @@ import {
   StyledButton
 } from './PeopleList';
 
-const CustomTitle = styled(Title)`
-  margin-bottom: 30px;
-`;
-
-const CreatePersonForm = styled.div`
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-
-  input {
-    width: 100%;
-    padding: 6px 10px;
-    outline: none;
-    border: 1px solid var(--color-primary-3);
-    box-sizing: border-box;
-    display: block;
-    font-size: 14px;
-    margin: 10px 0px 20px 0px;
-  }
-`;
-
-const LabelStyled = styled.label`
-  text-align: left;
-  display: block;
-  font-weight: 600;
-`;
-
-const ErrMsgStyled = styled.p`
-  margin: 30px;
-  color: var(--color-secondary-3);
-  font-weight: 600;
-`;
-
 const CreatePerson = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -137,3 +104,36 @@ const CreatePerson = () => {
 };
 
 export default CreatePerson;
+
+const CustomTitle = styled(Title)`
+  margin-bottom: 30px;
+`;
+
+const CreatePersonForm = styled.div`
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+
+  input {
+    width: 100%;
+    padding: 6px 10px;
+    outline: none;
+    border: 1px solid var(--color-primary-3);
+    box-sizing: border-box;
+    display: block;
+    font-size: 14px;
+    margin: 10px 0px 20px 0px;
+  }
+`;
+
+const LabelStyled = styled.label`
+  text-align: left;
+  display: block;
+  font-weight: 600;
+`;
+
+const ErrMsgStyled = styled.p`
+  margin: 30px;
+  color: var(--color-secondary-3);
+  font-weight: 600;
+`;
