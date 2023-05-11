@@ -2,6 +2,10 @@ import React from 'react'
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
+/* TODO: check how to optimize loading of movieList
+ * or modify modal to display "one" movie details
+*/
+
 const Modal = ({isOpen, setModalOpen, children}) => {
 
   if (isOpen) {

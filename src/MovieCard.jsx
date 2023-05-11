@@ -3,18 +3,19 @@ import styled from 'styled-components';
 import {
   useParams
 } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import { Rating } from 'react-simple-star-rating';
 
 const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
   const { movieTitle, overview, posterPathTMDB, movieRating } = movie;
   const [movieId, setMovieId] = useState('');
+  const [personRating, setPersonRating] = useState();
   const [isPending, setIsPending] = useState(false);
   const { id } = useParams();
 
-  const handleSubmit = (event) => {
+  const handleAddMovieSubmit = (event) => {
     event.preventDefault();
-
     setIsPending(true);
 
     //https://localhost:7294/api/PersonMovie/person/1/movie/93
@@ -26,15 +27,32 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
     }).then(() => {
       setIsPending(false);
 
-      //TODO: check other solution to avoid window.location.reload
+      //FIXME: check other solution to avoid window.location.reload as a hack
       window.location.reload();
+    })
+  }
+
+  const handleRatingSubmit = (personRating) => {
+    setIsPending(true);
+    setPersonRating(personRating);
+    console.log(personRating);
+
+    fetch(`https://localhost:7294/api/PersonMovie/movierating?personId=${id}&movieId=${movie.movieId}`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(personRating)
+    }).then(() => {
+      console.log("rating data:", personRating);
+      setIsPending(false);
+      //FIXME: check other solution to avoid window.location.reload as a hack
+      //window.location.reload();
     })
   }
 
   const handleAddMovie = () => {
     return (
       <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleAddMovieSubmit}>
           <button
             type='submit'
             value={movie.movieId}
@@ -59,12 +77,15 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
                     </div>
           <Title>{movieTitle}</Title>
           {showOverview && <Overview>{overview}</Overview>}
-          <p>Rating: {movieRating}</p>
+          <Rating
+            iconsCount={5}
+            initialValue={movieRating}
+            allowFraction size={15}
+            onClick={(personRating) =>
+            handleRatingSubmit(personRating)} />
         </div>
         {showAddMovie && <div>{handleAddMovie([])}</div>}
       </div>
-
-
     </ImageWrapper>
   );
 };
@@ -153,7 +174,7 @@ const Overview = styled.p`
   padding: 0 5px;
 `;
 
-const Rating = styled.p`
+const RatingStar = styled.p`
   font-size: 14px;
   background-color: var(--color-primary-3);
   padding: 10px 0px;
