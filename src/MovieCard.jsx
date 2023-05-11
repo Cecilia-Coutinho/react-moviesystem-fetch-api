@@ -10,7 +10,6 @@ import { Rating } from 'react-simple-star-rating';
 const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
   const { movieTitle, overview, posterPathTMDB, movieRating } = movie;
   const [movieId, setMovieId] = useState('');
-  const [personRating, setPersonRating] = useState();
   const [isPending, setIsPending] = useState(false);
   const { id } = useParams();
 
@@ -34,18 +33,15 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
 
   const handleRatingSubmit = (personRating) => {
     setIsPending(true);
-    setPersonRating(personRating);
-    console.log(personRating);
 
     fetch(`https://localhost:7294/api/PersonMovie/movierating?personId=${id}&movieId=${movie.movieId}`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(personRating)
     }).then(() => {
-      console.log("rating data:", personRating);
       setIsPending(false);
       //FIXME: check other solution to avoid window.location.reload as a hack
-      //window.location.reload();
+      window.location.reload();
     })
   }
 
@@ -67,14 +63,14 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
 
   return (
     <ImageWrapper>
-            <div className="container">
-                <div className="wrapper">
-                    <div className="banner-image">
-              <Image
-                src={POSTER_PREFIX + posterPathTMDB}
-                alt={`Poster for ${movieTitle}`}
-              />
-                    </div>
+      <div className="container">
+        <div className="wrapper">
+          <div className="banner-image">
+            <Image
+              src={POSTER_PREFIX + posterPathTMDB}
+              alt={`Poster for ${movieTitle}`}
+            />
+          </div>
           <Title>{movieTitle}</Title>
           {showOverview && <Overview>{overview}</Overview>}
           <Rating
@@ -172,13 +168,6 @@ const Overview = styled.p`
   font-size: 14px;
   margin-bottom: 20px;
   padding: 0 5px;
-`;
-
-const RatingStar = styled.p`
-  font-size: 14px;
-  background-color: var(--color-primary-3);
-  padding: 10px 0px;
-  color: var(--color-font-primary);
 `;
 
 export const POSTER_PREFIX = "https://image.tmdb.org/t/p/original";
