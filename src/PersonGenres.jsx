@@ -2,6 +2,9 @@ import GenreSelectionForm from "./GenreSelectionForm";
 import GenresList from "./GenresList";
 import { useState, useEffect} from "react";
 import useFetch from "./useFetch";
+import {
+  PStyled
+} from "./PersonMovies";
 
 const PersonGenres = ({ setIsPending, id }) => {
   const [genres, setGenres] = useState([]);
@@ -31,7 +34,7 @@ const PersonGenres = ({ setIsPending, id }) => {
   if (genresError) {
     return (
       <div>
-        <p>No genres found for this person.</p>
+        <PStyled>No genres found for this person.</PStyled>
         <GenreSelectionForm
           genres={genres}
           setGenres={setGenres}
@@ -57,7 +60,7 @@ const PersonGenres = ({ setIsPending, id }) => {
 
   if (personGenres && personGenres.length <= 0 && (
     <div>
-      <p>No genres found for this person.</p>
+      <PStyled>No genres found for this person.</PStyled>
       <GenreSelectionForm
         genres={genres}
         setGenres={setGenres}
@@ -68,7 +71,7 @@ const PersonGenres = ({ setIsPending, id }) => {
   ))
     return (
       <div>
-        <p>No genres found for this person.</p>
+        <PStyled>No genres found for this person.</PStyled>
         <GenreSelectionForm
           genres={genres}
           setGenres={setGenres}

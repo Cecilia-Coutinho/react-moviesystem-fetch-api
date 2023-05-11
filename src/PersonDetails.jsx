@@ -71,17 +71,6 @@ const StyledDetails = styled.div`
     font-size: 14px;
     margin: 40px 10px;
   }
-
-  form {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  p {
-      color: var(--color-primary-5);
-  }
 `;
 
 const StyledArticle = styled.article`
@@ -96,9 +85,12 @@ const StyledArticle = styled.article`
 
 const StyledGenresBox = styled.div`
   background-color: var(--color-primary-5);
-    background-color: rgba(231, 234, 239, 0.8);
-    width: 100%;
+  background-color: rgba(231, 234, 239, 0.8);
+  width: 100%;
   padding: 10px 25px;
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
