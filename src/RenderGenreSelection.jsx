@@ -20,7 +20,7 @@ const RenderGenreSelection = ({ setIsPending, id }) => {
     }).then(() => {
       setIsPending(false);
 
-      //TODO: check other solution to avoid window.location.reload
+      //FIXME: check other solution to avoid window.location.reload instead of using the hack window.location.reload()
       window.location.reload();
     })
   }
