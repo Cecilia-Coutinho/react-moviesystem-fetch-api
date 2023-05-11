@@ -3,6 +3,36 @@ import styled, { css } from 'styled-components';
 import {
   Title
 } from './PeopleList';
+import { memo } from "react";
+
+const GenresList = ({ genres, title }) => {
+
+  if (genres.length === 0) {
+    return <div>
+      <CustomTitle>{title}</CustomTitle>
+      <p>No genres found for this person.</p>
+    </div>;
+  }
+
+  return (
+    <div>
+      <CustomTitle>{title}</CustomTitle>
+      <GenresListContainer>
+      {genres.map((genre, index) => {
+        return (
+          <GenresStyled key={`genre_${index}`}>
+            <UlStyled>
+              <Tag>{genre}</Tag>
+            </UlStyled>
+          </GenresStyled>
+        );
+      })}
+      </GenresListContainer>
+    </div>
+  );
+}
+
+export default memo(GenresList);
 
 const CustomTitle = styled(Title)`
   display: flex;
@@ -41,32 +71,3 @@ const Tag = styled.li`
   margin: 8px;
   text-align: center;
 `;
-
-const GenresList = ({ genres, title }) => {
-
-  if (genres.length === 0) {
-    return <div>
-      <CustomTitle>{title}</CustomTitle>
-      <p>No genres found for this person.</p>
-    </div>;
-  }
-
-  return (
-    <div>
-      <CustomTitle>{title}</CustomTitle>
-      <GenresListContainer>
-      {genres.map((genre, index) => {
-        return (
-          <GenresStyled key={`genre_${index}`}>
-            <UlStyled>
-              <Tag>{genre}</Tag>
-            </UlStyled>
-          </GenresStyled>
-        );
-      })}
-      </GenresListContainer>
-    </div>
-  );
-}
-
-export default GenresList;
