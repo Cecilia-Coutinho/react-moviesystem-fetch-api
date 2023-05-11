@@ -4,32 +4,14 @@ import {
   useParams
 } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { FaPlus } from 'react-icons/fa';
 import { Rating } from 'react-simple-star-rating';
+import AddNewMovie from './AddNewMovie';
 
 const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
   const { movieTitle, overview, posterPathTMDB, movieRating } = movie;
-  const [movieId, setMovieId] = useState('');
+
   const [isPending, setIsPending] = useState(false);
   const { id } = useParams();
-
-  const handleAddMovieSubmit = (event) => {
-    event.preventDefault();
-    setIsPending(true);
-
-    //https://localhost:7294/api/PersonMovie/person/1/movie/93
-
-    fetch(`https://localhost:7294/api/PersonMovie/person/${id}/movie/${movie.movieId}`, {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(movie.movieId)
-    }).then(() => {
-      setIsPending(false);
-
-      //FIXME: check other solution to avoid window.location.reload as a hack
-      window.location.reload();
-    })
-  }
 
   const handleRatingSubmit = (personRating) => {
     setIsPending(true);
@@ -44,22 +26,6 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
       window.location.reload();
     })
   }
-
-  const handleAddMovie = () => {
-    return (
-      <div>
-        <form onSubmit={handleAddMovieSubmit}>
-          <button
-            type='submit'
-            value={movie.movieId}
-            onClick={(event) => setMovieId(event.target.value)}
-          >
-            <PlusButton />
-          </button>
-        </form>
-      </div>
-    );
-  };
 
   return (
     <ImageWrapper>
@@ -80,20 +46,15 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
             onClick={(personRating) =>
             handleRatingSubmit(personRating)} />
         </div>
-        {showAddMovie && <div>{handleAddMovie([])}</div>}
+        {showAddMovie && <div>
+          <AddNewMovie movie={ movie} setIsPending={setIsPending} id={id} />
+        </div>}
       </div>
     </ImageWrapper>
   );
 };
 
 export default MovieCard;
-
-const PlusButton = styled(FaPlus)`
-  margin: 1px;
-  font-size: 16px;
-  color: var(--color-primary-1);
-  background-color: var(--color-secondary-5);
-`;
 
 const ImageWrapper = styled.section`
   padding: 0;
