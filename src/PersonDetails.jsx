@@ -9,104 +9,16 @@ import {
   Title,
   StyledButton
 } from './PeopleList';
-import GenresList from "./GenresList";
 import MoviesList from "./MoviesList";
-
+import RenderGenreSelection from "./RenderGenreSelection";
 
 const PersonDetails = () => {
 
-  const [genreId, setGenreId] = useState('');
+
   const [isPending, setIsPending] = useState(false);
-  const [genres, setGenres] = useState([]);
   const { id } = useParams();
   const { data: person, isPending: isPersonPending, error: personError } = useFetch('https://localhost:7294/api/person/' + id);
 
-  const { data: personGenres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/personGenre/person?personId=${id}`);
-
-
-  useEffect(() => {
-    fetch('https://localhost:7294/api/genre')
-      .then(response => response.json())
-      .then(data => setGenres(data))
-      .catch(error => console.log(error));
-  }, []);
-
-  useEffect(() => {
-    if (genres.length > 0) {
-      setGenreId(genres[0].id);
-    }
-  }, [genres]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    setIsPending(true);
-
-    fetch(`https://localhost:7294/api/PersonGenre/person?personId=${id}`, {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(genreId)
-    }).then(() => {
-      setIsPending(false);
-
-      //TODO: check other solution to avoid window.location.reload
-      window.location.reload();
-    })
-  }
-
-  const handleGenreSelect = () => {
-    return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <LabelStyled> Add New Genre: </LabelStyled>
-          <select
-            value={genreId}
-            onChange={(event) => setGenreId(event.target.value)}
-          >
-            {genres.map((genre) => (
-              <option key={genre.id} value={genre.id}>{genre.name}</option>
-            ))}
-          </select>
-          <StyledButton type="submit"> + </StyledButton>
-        </form>
-      </div>
-    );
-  };
-
-  const renderGenres = () => {
-    if (isGenresPending) {
-      return <div>Loading...</div>;
-    }
-    if (genresError) {
-      return (
-        <div>
-          <p>No genres found for this person.</p>
-          {handleGenreSelect([])}
-        </div>
-      );
-    }
-    if (personGenres && personGenres.length > 0) {
-      return (
-        <div>
-          <GenresList genres={personGenres} title="Genre Preferences" />
-          {handleGenreSelect(genres)}
-        </div>
-      );
-    }
-
-    if (personGenres && personGenres.length <= 0 && (
-      <div>
-        <p>No genres found for this person.</p>
-        {handleGenreSelect([])}
-      </div>
-    ))
-      return (
-        <div>
-          <p>No genres found for this person.</p>
-          {handleGenreSelect([])}
-        </div>
-      );
-  };
 
   const { data: personMovies, isPending: isPersonMoviePending, error: personMoviesError } = useFetch(`https://localhost:7294/api/movies/${id}`);
 
@@ -170,7 +82,6 @@ const PersonDetails = () => {
       );
   };
 
-
   return (
     <StyledDetails>
       {isPersonPending && <div> Loading...</div>}
@@ -179,7 +90,9 @@ const PersonDetails = () => {
         <StyledArticle>
           <Title> {person.firstName} {person.lastName}</Title>
           <p>Email: {person.email}</p>
-          <StyledGenresBox>{renderGenres()}</StyledGenresBox>
+          <StyledGenresBox>
+            <RenderGenreSelection setIsPending={setIsPending} id={id} />
+          </StyledGenresBox>
           <div>{renderPersonMovies()}</div>
           <div>{renderAddMovies()}</div>
           <Link to={'/'}>
@@ -240,12 +153,6 @@ const PStyled = styled.p`
   font-size: 18px;
   font-weight: 400;
   border-radius: 5px;
-`;
-
-const LabelStyled = styled.label`
-  text-align: left;
-  font-weight: 600;
-  color: var(--color-font-primary);
 `;
 
 const StyledArticle = styled.article`
