@@ -3,7 +3,7 @@ import GenresList from "./GenresList";
 import { useState, useEffect} from "react";
 import useFetch from "./useFetch";
 
-const RenderGenreSelection = ({ setIsPending, id }) => {
+const PersonGenres = ({ setIsPending, id }) => {
   const [genres, setGenres] = useState([]);
   const [genreId, setGenreId] = useState('');
   const { data: personGenres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/personGenre/person?personId=${id}`);
@@ -81,4 +81,4 @@ const RenderGenreSelection = ({ setIsPending, id }) => {
   return null;
 }
 
-export default RenderGenreSelection;
+export default PersonGenres;

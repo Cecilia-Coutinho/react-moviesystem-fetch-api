@@ -10,7 +10,7 @@ import {
   StyledButton
 } from './PeopleList';
 import MoviesList from "./MoviesList";
-import RenderGenreSelection from "./RenderGenreSelection";
+import PersonGenres from "./PersonGenres";
 
 const PersonDetails = () => {
 
@@ -91,7 +91,7 @@ const PersonDetails = () => {
           <Title> {person.firstName} {person.lastName}</Title>
           <p>Email: {person.email}</p>
           <StyledGenresBox>
-            <RenderGenreSelection setIsPending={setIsPending} id={id} />
+            <PersonGenres setIsPending={setIsPending} id={id} />
           </StyledGenresBox>
           <div>{renderPersonMovies()}</div>
           <div>{renderAddMovies()}</div>
