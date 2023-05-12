@@ -12,7 +12,6 @@ const AddMovieRating = ({ movie, id, setIsPending }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(personRating)
     }).then((response) => {
-      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

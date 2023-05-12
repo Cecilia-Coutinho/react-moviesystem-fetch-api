@@ -20,7 +20,7 @@ const AllMovies = () => {
 
       <LinkButtons>
         <Link to={`/person/${id}`}>
-          <StyledButton>Previous Page</StyledButton>
+          <StyledButton>Go to your Profile</StyledButton>
         </Link>
         <Link to={'/'}>
           <StyledButton>Return to Home</StyledButton>
