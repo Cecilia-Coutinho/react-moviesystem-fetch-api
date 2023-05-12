@@ -11,7 +11,7 @@ import {
 } from './PeopleList';
 import PersonGenres from "./PersonGenres";
 import PersonMovies from "./PersonMovies";
-import AddPersonMovie from "./AddPersonMovie";
+import DisplayMoviesToAdd from "./DisplayMoviesToAdd";
 
 const PersonDetails = () => {
   const [isPending, setIsPending] = useState(false);
@@ -33,7 +33,7 @@ const PersonDetails = () => {
           <PersonMovies id={id} />
           </div>
           <div>
-            <AddPersonMovie />
+            <DisplayMoviesToAdd />
           </div>
           <Link to={'/'}>
             <StyledButton>Return to Home</StyledButton>
