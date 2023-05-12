@@ -18,7 +18,6 @@ const AddNewMovie = ({movie, setIsPending, id}) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(movieId)
     }).then((response) => {
-      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -27,10 +26,8 @@ const AddNewMovie = ({movie, setIsPending, id}) => {
       setIsPending(false);
       setMovieId(movieIdToAdd);
       setOpenModal(true);
-      console.log(movieId)
     }).catch((error) => {
       setIsPending(false);
-
       console.error(error);
     })
   }
