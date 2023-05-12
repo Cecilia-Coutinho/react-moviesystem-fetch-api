@@ -1,18 +1,28 @@
 import { Rating } from 'react-simple-star-rating';
+import { useState } from 'react';
 
 const AddMovieRating = ({ movie, id, setIsPending }) => {
+  const [ratings, setRatings] = useState([]);
 
-  const handleRatingSubmit = (personRating) => {
+  const handleRatingSubmit = async (personRating) => {
     setIsPending(true);
 
-    fetch(`https://localhost:7294/api/PersonMovie/movierating?personId=${id}&movieId=${movie.movieId}`, {
+    fetch(`https://localhost:7294/api/personMovie/movierating?personId=${id}&movieId=${movie.movieId}`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(personRating)
-    }).then(() => {
+    }).then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: \${response.status}`);
+      }
+      return response.json();
+    }).then((newRatingData) => {
       setIsPending(false);
-      //FIXME: check other solution to avoid window.location.reload as a hack
-      window.location.reload();
+      setRatings([...ratings, newRatingData]);
+    })
+      .catch(() => {
+        console.error(error);
     })
   }
 
