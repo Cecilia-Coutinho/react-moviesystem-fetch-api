@@ -2,9 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
-/* TODO: check how to optimize loading of movieList
- * or modify modal to display "one" movie details
-*/
 
 const Modal = ({isOpen, setModalOpen, children}) => {
 
@@ -48,7 +45,7 @@ const ModalStyle = styled.div`
   padding: 50px;
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.25);
+  background-color: rgba(17, 25, 40, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.125);
   filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125));
   border-radius: 5px;
@@ -69,8 +66,8 @@ const ChildrenWrapper = styled.div`
 
 const CloseButton = styled.div`
   position: absolute;
-  top: 40px;
-  right: 100px;
+  top: 10px;
+  right: 20px;
   cursor: pointer;
   font-size: 38px;
   color: var(--color-primary-5);

@@ -2,10 +2,12 @@ import { memo } from "react";
 import { FaPlus } from 'react-icons/fa';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Modal from './Modal';
 
 const AddNewMovie = ({movie, setIsPending, id}) => {
 
   const [movieId, setMovieId] = useState('');
+  const [openModal, setOpenModal] = useState(false);
 
   const handleAddMovieSubmit = (event) => {
     event.preventDefault();
@@ -24,9 +26,11 @@ const AddNewMovie = ({movie, setIsPending, id}) => {
     }).then((movieIdToAdd) => {
       setIsPending(false);
       setMovieId(movieIdToAdd);
+      setOpenModal(true);
       console.log(movieId)
     }).catch((error) => {
       setIsPending(false);
+
       console.error(error);
     })
   }
@@ -42,6 +46,9 @@ const AddNewMovie = ({movie, setIsPending, id}) => {
             <PlusButton />
           </button>
         </form>
+        <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
+          <p style={{ fontSize: "16px", margin: "0 auto", padding: "20px 0px" }}>Movie Added</p>
+        </Modal>
       </div>
     );
 }
