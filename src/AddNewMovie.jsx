@@ -11,15 +11,23 @@ const AddNewMovie = ({movie, setIsPending, id}) => {
     event.preventDefault();
     setIsPending(true);
 
-    fetch(`https://localhost:7294/api/PersonMovie/person/${id}/movie/${movie.movieId}`, {
+    fetch(`https://localhost:7294/api/personMovie/person/${id}/movie/${movie.movieId}`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(movieId)
-    }).then(() => {
+    }).then((response) => {
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    }).then((movieIdToAdd) => {
       setIsPending(false);
-
-      //FIXME: check other solution to avoid window.location.reload as a hack
-      window.location.reload();
+      setMovieId(movieIdToAdd);
+      console.log(movieId)
+    }).catch((error) => {
+      setIsPending(false);
+      console.error(error);
     })
   }
 

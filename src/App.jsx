@@ -9,6 +9,7 @@ import {
   Route
 } from "react-router-dom";
 import NotFound from './NotFound';
+import AllMovies from './AllMovies';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route exact path='/' element={<Home />}></Route>
             <Route path='/createperson' element={<CreatePerson />}></Route>
             <Route path='/person/:id' element={<PersonDetails />}></Route>
+            <Route path='/allmovies/person/:id' element={<AllMovies />}></Route>
             <Route path='*' element={<NotFound />}></Route>
           </Routes>
         </div>

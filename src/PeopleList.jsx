@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FaUser } from 'react-icons/fa';
-import ReactPaginate from 'react-paginate';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 //props ({ people, title, ...})
 const PeopleList = ({ people, title }) => {

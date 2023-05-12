@@ -20,7 +20,11 @@ const DisplayMoviesToAdd = () => {
   if (movies && movies.length > 0) {
     return (
       <div>
-        <MoviesList movies={movies} title="All Movies" showOverviewCondition={false} showAddMovieCondition={true} />
+        <MoviesList
+          movies={movies}
+          title="All Movies" showOverviewCondition={false} showAddMovieCondition={true}
+          showAddRatingCondition={true}
+        />
       </div>
     );
   }

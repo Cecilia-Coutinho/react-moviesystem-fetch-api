@@ -14,14 +14,15 @@ const AddMovieRating = ({ movie, id, setIsPending }) => {
     }).then((response) => {
       console.log(response);
       if (!response.ok) {
-        throw new Error(`HTTP error! status: \${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
       return response.json();
     }).then((newRatingData) => {
       setIsPending(false);
       setRatings([...ratings, newRatingData]);
     })
-      .catch(() => {
+      .catch((error) => {
+        setIsPending(false);
         console.error(error);
     })
   }

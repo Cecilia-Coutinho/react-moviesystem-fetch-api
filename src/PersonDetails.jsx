@@ -11,7 +11,6 @@ import {
 } from './PeopleList';
 import PersonGenres from "./PersonGenres";
 import PersonMovies from "./PersonMovies";
-import DisplayMoviesToAdd from "./DisplayMoviesToAdd";
 
 const PersonDetails = () => {
   const [isPending, setIsPending] = useState(false);
@@ -32,9 +31,9 @@ const PersonDetails = () => {
           <div>
           <PersonMovies id={id} />
           </div>
-          <div>
-            <DisplayMoviesToAdd />
-          </div>
+          <Link to={`/allmovies/person/${id}`}>
+            <StyledButton>SEE ALL MOVIES</StyledButton>
+          </Link>
           <Link to={'/'}>
             <StyledButton>Return to Home</StyledButton>
           </Link>
@@ -73,7 +72,7 @@ const StyledDetails = styled.div`
   }
 `;
 
-const StyledArticle = styled.article`
+export const StyledArticle = styled.article`
   background-color: rgba(0, 0, 0, 0.3);
   margin: 0 auto;
   font-weight: 600;

@@ -24,7 +24,8 @@ if (isPersonMoviePending) {
       return (
         <div>
           <MoviesList movies={personMovies} title="Movies Preferences" showOverviewCondition={false}
-          showAddMovieCondition={false}
+            showAddMovieCondition={false}
+            showAddRatingCondition={true}
           />
         </div>
       );

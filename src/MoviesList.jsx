@@ -1,58 +1,70 @@
 import React from 'react';
 import styled from 'styled-components';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+//import "react-responsive-carousel/lib/styles/carousel.min.css";
+//import { Carousel } from 'react-responsive-carousel';
 import MovieCard from './MovieCard';
 import { useState, useEffect } from 'react';
 import Modal from './Modal';
 import {
   StyledButton
 } from './PeopleList';
+import ReactPaginate from 'react-paginate';
 
 
-const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieCondition }) => {
+const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieCondition, showAddRatingCondition }) => {
 
   const [openModal, setOpenModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 12;
+  const pageCount = Math.ceil(movies.length / itemsPerPage);
+  const offset = currentPage * itemsPerPage;
 
-  const [pagination, setPagination] = useState(0);
-  useEffect(() => {
-    setPagination(1);
-  }, [pagination]);
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
   return (
 
-    <CarouselContainer>
+    <Container>
       <CustomTitle>{title}</CustomTitle>
-      <CustomCarousel
-        showThumbs={false}
-        showArrows={false}
-        infiniteLoop={true}
-        autoPlay={true}
-        interval={8000}
-        showIndicators={true}
+      <ListMovies
       >
-        {movies.map((movie, index) => {
+        {movies.slice(offset, offset + itemsPerPage).map((movie, index) => {
           return (
             <div key={movie.movieId}>
               <MovieCard
                 movie={movie}
                 showOverview={showOverviewCondition}
                 showAddMovie={showAddMovieCondition}
+                showAddRating={showAddRatingCondition}
               />
               <PaginationDetails>
-                <p>Showing {pagination} of {movies.length} items</p>
+                <p>{index + 1} of {movies.length}</p>
               </PaginationDetails>
             </div>
           );
         })}
-      </CustomCarousel >
-      <ModalButton>
+      </ListMovies >
+      <StyledPaginateContainer>
+        <ReactPaginate
+          previousLabel={<div className="pagination-btn">previous</div>}
+          nextLabel={<div className="pagination-btn">next</div>}
+          breakLabel={'...'}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+        />
+      </StyledPaginateContainer>
+{/*       <ModalButton>
         <Button onClick={() => setOpenModal(true)}>
           SEE ALL
         </Button>
       </ModalButton>
       <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
-        {movies.map((movie, index) => {
+        {movies.map((movie) => {
           return (
             <div key={movie.movieId}>
               <MovieCard
@@ -63,8 +75,8 @@ const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieConditio
             </div>
           );
         })}
-      </Modal>
-    </CarouselContainer>
+      </Modal> */}
+    </Container>
   );
 }
 
@@ -79,24 +91,34 @@ export const CustomTitle = styled.h2`
   justify-content: center;
 `;
 
-const CarouselContainer = styled.div`
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content:center;
   align-items: center;
 `;
 
+const ListMovies = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
 const Button = styled(StyledButton)`
   width: 150px;
 `;
 
-const ModalButton = styled.div`
+/* const ModalButton = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
+`; */
 
-const CustomCarousel = styled(Carousel)`
+/* const CustomCarousel = styled(Carousel)`
   font-size: 14px;
   margin: 0 auto;
   padding: 10px;
@@ -118,12 +140,63 @@ const CustomCarousel = styled(Carousel)`
     margin-bottom: 20px;
   }
 }
-`;
+`; */
 
 const PaginationDetails = styled.div`
   margin: 0 auto;
   padding: 10px 10px;
   font-weight: 600;
+`;
+
+const StyledPaginateContainer = styled.div`
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pagination li {
+    margin-right: 10px;
+  }
+
+  .page-item {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .active {
+    background-color: var(--color-primary-1);
+    color: var(--color-primary-5);
+    padding: 0 3px;
+  }
+
+  .pagination-btn {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--color-primary-5);
+    color: var(--color-primary-1);
+  }
+
+  .pagination-btn:hover {
+    background-color: #1e50ff;
+    color: #fff;
+    border-color: #1e50ff;
+  }
+
+  .pagination-space {
+    margin: 0 5px;
+  }
 `;
 
 

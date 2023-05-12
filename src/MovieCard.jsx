@@ -25,7 +25,7 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
           </div>
           <Title>{movieTitle}</Title>
           {showOverview && <Overview>{overview}</Overview>}
-          <AddMovieRating movie={movie} id={id} setIsPending={setIsPending}></AddMovieRating>
+          {showAddRating && <AddMovieRating movie={movie} id={id} setIsPending={setIsPending}></AddMovieRating>}
         </div>
         {showAddMovie && <div>
           <AddNewMovie movie={ movie} setIsPending={setIsPending} id={id} />
@@ -55,6 +55,7 @@ const ImageWrapper = styled.section`
     text-align: center;
     max-width: 230px;
     width: 100%;
+    height:500px;
     object-fit: cover;
     margin: 0 auto;
     padding: 10px;
