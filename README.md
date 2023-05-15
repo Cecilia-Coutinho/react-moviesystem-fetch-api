@@ -6,7 +6,7 @@ by <a href="https://github.com/Cecilia-Coutinho">Cecilia Coutinho</a>
 
 <h2>🌍 Overview</h2>
 
-<p align = center>
+<p>
 The development of this project was required by Chas Academy, and as such, it followed the specified requirements and deadline. The primary objective of the project was to create a user-friendly client in React to interact with the ASP.NET API, eliminating the need for users to rely on tools like Swagger or Insomnia. To achieve this, the project was set up to use React.Vite as the build tool and React Router and Styled Components for routing and styling, respectively.
 </p>
 
