@@ -7,14 +7,16 @@ import {
 } from "./PersonMovies";
 import styled from "styled-components";
 
+//PersonDetails child component: Print Person Genres section
+
 const PersonGenres = ({ setIsPending, id }) => {
   const [genres, setGenres] = useState([]);
   const [genreId, setGenreId] = useState('');
   const { data: personGenres, isPending: isGenresPending, error: genresError } = useFetch(`https://localhost:7294/api/personGenre/person?personId=${id}`);
 
+  // POST request to add new genre to the person's genres
   const handleSubmit = (event) => {
     event.preventDefault();
-
     setIsPending(true);
 
     fetch(`https://localhost:7294/api/personGenre/person?personId=${id}`, {
@@ -29,9 +31,12 @@ const PersonGenres = ({ setIsPending, id }) => {
     })
   }
 
+  //print loading
   if (isGenresPending) {
     return <div>Loading...</div>;
   }
+
+  //catch if there's an error: display the error and show the form
   if (genresError) {
     return (
       <div>
@@ -45,6 +50,8 @@ const PersonGenres = ({ setIsPending, id }) => {
       </div>
     );
   }
+
+  //print list of genres with props and the form
   if (personGenres && personGenres.length > 0) {
     return (
       <div>
@@ -59,6 +66,7 @@ const PersonGenres = ({ setIsPending, id }) => {
     );
   }
 
+  // Display message if there are no genres found for the person and show the form
   if (personGenres && personGenres.length <= 0 && (
     <div>
       <P>No genres found for this person.</P>
@@ -82,6 +90,7 @@ const PersonGenres = ({ setIsPending, id }) => {
       </div>
     );
 
+  // Return null if none of the conditions are met
   return null;
 }
 
