@@ -1,5 +1,3 @@
-# react-moviesystem-fetch-api
-
 🎬 React Movie System Fetch API 🎬
 by Cecilia Coutinho
 
