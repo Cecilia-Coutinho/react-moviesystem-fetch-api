@@ -10,11 +10,11 @@ import {
 } from './PeopleList';
 import ReactPaginate from 'react-paginate';
 
-
+//Component parent of the movieCards
 const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieCondition, showAddRatingCondition }) => {
-
-  //const [openModal, setOpenModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+
+  //pagination
   const itemsPerPage = 12;
   const pageCount = Math.ceil(movies.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -23,6 +23,7 @@ const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieConditio
     setCurrentPage(selected);
   };
 
+  //render list of movie cards
   return (
 
     <Container>
@@ -58,30 +59,13 @@ const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieConditio
           activeClassName={'active'}
         />
       </StyledPaginateContainer>
-      {/*       <ModalButton>
-        <Button onClick={() => setOpenModal(true)}>
-          SEE ALL
-        </Button>
-      </ModalButton>
-      <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
-        {movies.map((movie) => {
-          return (
-            <div key={movie.movieId}>
-              <MovieCard
-                movie={movie}
-                showOverview={true}
-                showAddMovie={showAddMovieCondition}
-              />
-            </div>
-          );
-        })}
-      </Modal> */}
     </Container>
   );
 }
 
 export default MoviesList;
 
+// Styling for the custom title
 export const CustomTitle = styled.h2`
   margin: 0px 0 20px 0;
   color: var(--color-primary-5);
@@ -91,6 +75,7 @@ export const CustomTitle = styled.h2`
   justify-content: center;
 `;
 
+// movies list container
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -98,6 +83,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
+// movies list
 const ListMovies = styled.div`
   margin: 0 auto;
   display: flex;
@@ -108,12 +94,14 @@ const ListMovies = styled.div`
   gap: 10px;
 `;
 
+// pagination details
 const PaginationDetails = styled.div`
   margin: 0 auto;
   padding: 10px 10px;
   font-weight: 600;
 `;
 
+// pagination container
 const StyledPaginateContainer = styled.div`
   margin-bottom: 20px;
 
@@ -166,40 +154,3 @@ const StyledPaginateContainer = styled.div`
     margin: 0 5px;
   }
 `;
-
-
-/* const Button = styled(StyledButton)`
-  width: 150px;
-`; */
-
-/* const ModalButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`; */
-
-/* const CustomCarousel = styled(Carousel)`
-  font-size: 14px;
-  margin: 0 auto;
-  padding: 10px;
-
-  .carousel .control-dots {
-        margin: 0;
-    width: 100%;
-    position: absolute;
-  }
-
-  .carousel .control-dots .dot {
-  width: 12px;
-  height: 12px;
-  margin: 0px 5px;
-  background: var(--color-primary-1);
-}
-
-.carousel .slider-wrapper {
-    margin-bottom: 20px;
-  }
-}
-`; */
-
-
