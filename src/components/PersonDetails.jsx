@@ -12,6 +12,8 @@ import {
 import PersonGenres from "./PersonGenres";
 import PersonMovies from "./PersonMovies";
 
+//Page that displays the person details
+
 const PersonDetails = () => {
   const [isPending, setIsPending] = useState(false);
   const { id } = useParams();
@@ -19,8 +21,14 @@ const PersonDetails = () => {
 
   return (
     <StyledDetails>
+
+      {/*print loading*/}
       {isPersonPending && <div> Loading...</div>}
+
+      {/*catch if there's an error*/}
       {personError && <div> {personError.message}</div>}
+
+      {/* print details */}
       {person && (
         <StyledArticle>
           <Title> {person.firstName} {person.lastName}</Title>
@@ -46,6 +54,8 @@ const PersonDetails = () => {
 }
 
 export default PersonDetails;
+
+//styling:
 
 const StyledDetails = styled.div`
   margin: 0 auto;
