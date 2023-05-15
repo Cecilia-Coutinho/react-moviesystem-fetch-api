@@ -70,4 +70,4 @@ Furthermore, I explored various carousel libraries to add a dynamic touch to the
 
 Witnessing the integration of frontend and backend components, working harmoniously to shape the final product and bring it to life has been both fascinating and exciting.
 
-Note: There's still some instances of repetitive code, particularly in the conditional rendering blocks and a code refactor it to reduce duplication would improve code maintainability. Additionally, there is a hack/temporary workaround in the PersonGenres component that could not be prioritized on time.
+Note: There's still some instances of repetitive code, particularly in the conditional rendering blocks and refactoring the code to reduce duplication would improve code maintainability. Additionally, there is a hack/temporary workaround in the PersonGenres component that could not be prioritized on time.
