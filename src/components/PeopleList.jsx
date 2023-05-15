@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaUser } from 'react-icons/fa';
 import { useState } from "react";
 
-//props ({ people, title, ...})
+//component that render a list of people to display in the homePage
 const PeopleList = ({ people, title }) => {
 
   // Sort the people array by the firstName property
@@ -12,6 +12,7 @@ const PeopleList = ({ people, title }) => {
   );
   const [search, setSearch] = useState('');
 
+  // search bar to filter by name
   const filteredSearch = search.length > 0
     ? sortedPeople.filter(person => `${person.firstName} ${person.lastName}`
       .toLowerCase()
@@ -73,6 +74,8 @@ const PeopleList = ({ people, title }) => {
 }
 
 export default PeopleList;
+
+// Styling:
 
 export const Title = styled.h2`
   margin: 40px 0 20px 0;
