@@ -5,11 +5,15 @@ import {
 } from "./PersonMovies";
 
 const DisplayMoviesToAdd = () => {
+  // Fetching movies data
   const { data: movies, isPending: isMoviesPending, error: moviesError } = useFetch(`https://localhost:7294/api/movies`);
 
+  // If movies are still loading, display a loading message
   if (isMoviesPending) {
     return <div style={{ color: "var(--color-primary-5)" }}>Loading...</div>;
   }
+
+  // If there was an error fetching movies, display an error message
   if (moviesError) {
     return (
       <div>
@@ -17,6 +21,8 @@ const DisplayMoviesToAdd = () => {
       </div>
     );
   }
+
+  // If movies data is available and there are movies to display, render the MoviesList component
   if (movies && movies.length > 0) {
     return (
       <div>
@@ -29,14 +35,15 @@ const DisplayMoviesToAdd = () => {
     );
   }
 
-
-  if (movies && movies.length === 0)
+  // If movies data is available but there are no movies to display, show a message indicating no movies found
+  if (movies && movies.length === 0) {
     return (
       <div>
         <PStyled>No movies found.</PStyled>
       </div>
     );
-
+  }
+  
   return null;
 }
 
