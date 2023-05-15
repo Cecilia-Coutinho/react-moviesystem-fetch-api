@@ -5,14 +5,15 @@ import styled from 'styled-components';
 import Modal from './Modal';
 
 const AddNewMovie = ({ movie, setIsPending, id }) => {
-
   const [movieId, setMovieId] = useState('');
   const [openModal, setOpenModal] = useState(false);
 
+  //handle the submission of adding a new movie
   const handleAddMovieSubmit = (event) => {
     event.preventDefault();
     setIsPending(true);
 
+    // Send a POST request to the server with the personId and movieId data
     fetch(`https://localhost:7294/api/personMovie/person/${id}/movie/${movie.movieId}`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
@@ -52,6 +53,7 @@ const AddNewMovie = ({ movie, setIsPending, id }) => {
 
 export default memo(AddNewMovie);
 
+// Styled component for the PlusButton using FaPlus from react-icons library
 const PlusButton = styled(FaPlus)`
   margin: 1px;
   font-size: 16px;
