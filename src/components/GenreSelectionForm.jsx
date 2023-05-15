@@ -5,8 +5,11 @@ import styled from 'styled-components';
 import { useEffect } from "react";
 import { memo } from "react";
 
+  //form component that allows users to select a genre from a list of genres and submit the selected genre.
+
 const GenreSelectionForm = ({ genres, setGenres, genreId, setGenreId, handleSubmit }) => {
 
+  // Fetching genre data
   useEffect(() => {
     fetch('https://localhost:7294/api/genre')
       .then(response => response.json())
@@ -14,6 +17,7 @@ const GenreSelectionForm = ({ genres, setGenres, genreId, setGenreId, handleSubm
       .catch(error => console.log(error));
   }, []);
 
+  // Setting the genreId to the first genre in the genres array on genre data change
   useEffect(() => {
     if (genres.length > 0) {
       setGenreId(genres[0].id);
@@ -21,6 +25,7 @@ const GenreSelectionForm = ({ genres, setGenres, genreId, setGenreId, handleSubm
   }, [genres]);
 
 
+  //render the form with a dropdown genre options to add
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -42,6 +47,7 @@ const GenreSelectionForm = ({ genres, setGenres, genreId, setGenreId, handleSubm
 
 export default memo(GenreSelectionForm);
 
+// Styled component for the custom label
 const LabelStyled = styled.label`
   text-align: left;
   font-weight: 600;
