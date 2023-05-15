@@ -9,9 +9,12 @@ const PersonMovies = ({ id }) => {
 
   const { data: personMovies, isPending: isPersonMoviePending, error: personMoviesError } = useFetch(`https://localhost:7294/api/movies/${id}`);
 
+  //print loading
   if (isPersonMoviePending) {
     return <div style={{ color: "var(--color-primary-5)" }}>Loading...</div>;
   }
+
+  //print error
   if (personMoviesError) {
     return (
       <div>
@@ -20,6 +23,8 @@ const PersonMovies = ({ id }) => {
       </div>
     );
   }
+
+  //print person movies section
   if (personMovies && personMovies.length > 0) {
     return (
       <div>
@@ -31,6 +36,7 @@ const PersonMovies = ({ id }) => {
     );
   }
 
+  //no movies found for the person
   if (personMovies && personMovies.length === 0)
     return (
       <div>
@@ -39,6 +45,7 @@ const PersonMovies = ({ id }) => {
       </div>
     );
 
+  // Return null if none of the conditions are met
   return null;
 }
 
