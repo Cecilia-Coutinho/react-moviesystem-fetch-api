@@ -18,6 +18,7 @@ const CreatePerson = () => {
   const { createNewPerson } = useFetch('https://localhost:7294/api/person');
   const navigateTo = useNavigate();
 
+  //validate email address format
   const validateEmail = (mail) => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(String(mail).toLocaleLowerCase())) {
       return true;
@@ -26,9 +27,11 @@ const CreatePerson = () => {
     }
   }
 
+  //handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // Validate email address
     const isValid = validateEmail(email);
     setIsEmailValid(isValid);
 
@@ -105,6 +108,7 @@ const CreatePerson = () => {
 
 export default CreatePerson;
 
+// Styled components for the custom title, form container, label and paragraph
 const CustomTitle = styled(Title)`
   margin-bottom: 30px;
 `;
