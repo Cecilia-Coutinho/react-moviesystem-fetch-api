@@ -9,9 +9,8 @@ import AddMovieRating from './AddMovieRating';
 
 const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
   const { movieTitle, overview, posterPathTMDB, movieRating } = movie;
-
   const [isPending, setIsPending] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams(); //// Extracting the "id" parameter from the URL
 
   return (
     <ImageWrapper>
@@ -36,6 +35,8 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
 };
 
 export default MovieCard;
+
+// Styling for the movie card
 
 const ImageWrapper = styled.section`
   padding: 0;
