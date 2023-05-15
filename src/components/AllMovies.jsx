@@ -26,12 +26,14 @@ const AllMovies = () => {
           <StyledButton>Return to Home</StyledButton>
         </Link>
       </LinkButtons>
+
     </StyledArticle>
   );
 }
 
 export default AllMovies;
 
+// Styled component for the Link buttons
 const LinkButtons = styled.div`
   margin: 30px 0;
   display: flex;
