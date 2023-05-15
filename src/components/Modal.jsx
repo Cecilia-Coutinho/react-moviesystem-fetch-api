@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
+const Modal = ({ isOpen, setModalOpen, children }) => {
 
-const Modal = ({isOpen, setModalOpen, children}) => {
-
+//display content when is open
   if (isOpen) {
     return (
       <BackgroundStyle>
@@ -23,6 +23,7 @@ const Modal = ({isOpen, setModalOpen, children}) => {
 
 export default Modal;
 
+// Styling for the modal background
 const BackgroundStyle = styled.div`
   position: fixed;
   margin: 0 auto;
@@ -31,6 +32,7 @@ const BackgroundStyle = styled.div`
   display: flex;
 `;
 
+//modal container
 const ModalStyle = styled.div`
  box-sizing: border-box;
   position: fixed;
