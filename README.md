@@ -1,12 +1,15 @@
-🎬 React Movie System Fetch API 🎬
-by Cecilia Coutinho
+<h1 align="center"> 🎬 React Movie System Fetch API 🎬</h1>
 
-🌍 Overview
+<p align = center>
+by <a href="https://github.com/Cecilia-Coutinho">Cecilia Coutinho</a>
+</p>
+
+<h2>🌍 Overview</h2>
 The development of this project was required by Chas Academy, and as such, it followed the specified requirements and deadline. The primary objective of the project was to create a user-friendly client in React to interact with the ASP.NET API, eliminating the need for users to rely on tools like Swagger or Insomnia. To achieve this, the project was set up to use React.Vite as the build tool and React Router and Styled Components for routing and styling, respectively.
 
 It's woth noting that the main focus was solely on implementing the ability to make requests to the existing endpoints of the API.
 
-📋 MVP Features:
+<h2>📋 MVP Features:</h2>
 
 🏠 Home Page: Automatically displays a comprehensive list of all individuals in the system.
 
@@ -25,7 +28,7 @@ It's woth noting that the main focus was solely on implementing the ability to m
     ➕ In the movies section, there should be an option to add a new movie link and rating.
 
 
-💻 Technology Stack
+<h2>💻 Technology Stack</h2>
 
 👨‍💻 React
 
@@ -54,7 +57,7 @@ It's woth noting that the main focus was solely on implementing the ability to m
     💅 styled-components: v5.3.10
 
 
-💭Reflections and Aditional Info
+<h2>💭Reflections and Aditional Info</h2>
 
 In terms of UI/UX, the structure of the client has been improved, although it is still a work in progress. There is potential for further enhancements and refinements in the future. As an additional practice, I introduced some features that were not strictly required but aimed to improve the overall user experience. These included a form to create a new person and a search bar on the home page for effortless person lookup.
 
