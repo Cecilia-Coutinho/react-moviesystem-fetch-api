@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   useParams
 } from "react-router-dom";
-import { useState} from 'react';
+import { useState } from 'react';
 import AddNewMovie from './AddNewMovie';
 import AddMovieRating from './AddMovieRating';
 
@@ -28,7 +28,7 @@ const MovieCard = ({ movie, showOverview, showAddMovie, showAddRating }) => {
           {showAddRating && <AddMovieRating movie={movie} id={id} setIsPending={setIsPending}></AddMovieRating>}
         </div>
         {showAddMovie && <div>
-          <AddNewMovie movie={ movie} setIsPending={setIsPending} id={id} />
+          <AddNewMovie movie={movie} setIsPending={setIsPending} id={id} />
         </div>}
       </div>
     </ImageWrapper>

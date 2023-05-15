@@ -2,7 +2,7 @@ import {
   useParams,
   Link
 } from "react-router-dom";
-import { useState} from "react";
+import { useState } from "react";
 import useFetch from "./useFetch";
 import styled from 'styled-components';
 import {
@@ -29,14 +29,16 @@ const PersonDetails = () => {
             <PersonGenres setIsPending={setIsPending} id={id} />
           </StyledGenresBox>
           <div>
-          <PersonMovies id={id} />
+            <PersonMovies id={id} />
           </div>
+          <div className="buttons">
           <Link to={`/allmovies/person/${id}`}>
             <StyledButton>SEE ALL MOVIES</StyledButton>
           </Link>
           <Link to={'/'}>
-            <StyledButton>Return to Home</StyledButton>
+            <HomeButton>RETURN TO HOME</HomeButton>
           </Link>
+        </div>
         </StyledArticle>
       )}
     </StyledDetails>
@@ -97,4 +99,8 @@ const Email = styled.p`
 color: var(--color-primary-5);
 font-weight: 400;
 `
+const HomeButton = styled(StyledButton)`
+margin: 30px;
+padding: 10px 25px;
+`;
 

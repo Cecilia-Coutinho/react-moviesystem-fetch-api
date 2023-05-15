@@ -13,7 +13,7 @@ import ReactPaginate from 'react-paginate';
 
 const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieCondition, showAddRatingCondition }) => {
 
-  const [openModal, setOpenModal] = useState(false);
+  //const [openModal, setOpenModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 12;
   const pageCount = Math.ceil(movies.length / itemsPerPage);
@@ -58,7 +58,7 @@ const MoviesList = ({ movies, title, showOverviewCondition, showAddMovieConditio
           activeClassName={'active'}
         />
       </StyledPaginateContainer>
-{/*       <ModalButton>
+      {/*       <ModalButton>
         <Button onClick={() => setOpenModal(true)}>
           SEE ALL
         </Button>
@@ -115,6 +115,8 @@ const PaginationDetails = styled.div`
 `;
 
 const StyledPaginateContainer = styled.div`
+  margin-bottom: 20px;
+
   .pagination {
     display: flex;
     justify-content: center;

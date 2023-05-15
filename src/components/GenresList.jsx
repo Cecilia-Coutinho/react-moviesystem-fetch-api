@@ -18,15 +18,15 @@ const GenresList = ({ genres, title }) => {
     <div>
       <CustomTitle>{title}</CustomTitle>
       <GenresListContainer>
-      {genres.map((genre, index) => {
-        return (
-          <GenresStyled key={`genre_${index}`}>
-            <UlStyled>
-              <Tag>{genre}</Tag>
-            </UlStyled>
-          </GenresStyled>
-        );
-      })}
+        {genres.map((genre, index) => {
+          return (
+            <GenresStyled key={`genre_${index}`}>
+              <UlStyled>
+                <Tag>{genre}</Tag>
+              </UlStyled>
+            </GenresStyled>
+          );
+        })}
       </GenresListContainer>
     </div>
   );

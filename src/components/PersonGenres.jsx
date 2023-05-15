@@ -1,6 +1,6 @@
 import GenreSelectionForm from "./GenreSelectionForm";
 import GenresList from "./GenresList";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import useFetch from "./useFetch";
 import {
   PStyled

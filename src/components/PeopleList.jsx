@@ -87,7 +87,7 @@ export const Title = styled.h2`
 
 export const StyledButton = styled.button`
   margin: 10px 10px 10px 0px;
-  padding: 5px 10px;
+  padding: 10px 15px;
   background-color: var(--color-primary-4);
   border: none;
   border-radius: 5px;

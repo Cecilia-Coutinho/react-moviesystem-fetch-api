@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal';
 
-const AddNewMovie = ({movie, setIsPending, id}) => {
+const AddNewMovie = ({ movie, setIsPending, id }) => {
 
   const [movieId, setMovieId] = useState('');
   const [openModal, setOpenModal] = useState(false);
@@ -32,22 +32,22 @@ const AddNewMovie = ({movie, setIsPending, id}) => {
     })
   }
 
-    return (
-      <div>
-        <form onSubmit={handleAddMovieSubmit}>
-          <button
-            type='submit'
-            value={movie.movieId}
-            onClick={(event) => setMovieId(event.target.value)}
-          >
-            <PlusButton />
-          </button>
-        </form>
-        <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
-          <p style={{ fontSize: "16px", margin: "0 auto", padding: "20px 0px" }}>Movie Added</p>
-        </Modal>
-      </div>
-    );
+  return (
+    <div>
+      <form onSubmit={handleAddMovieSubmit}>
+        <button
+          type='submit'
+          value={movie.movieId}
+          onClick={(event) => setMovieId(event.target.value)}
+        >
+          <PlusButton />
+        </button>
+      </form>
+      <Modal isOpen={openModal} setModalOpen={() => setOpenModal(!openModal)}>
+        <p style={{ fontSize: "16px", margin: "0 auto", padding: "20px 0px" }}>Movie Added</p>
+      </Modal>
+    </div>
+  );
 }
 
 export default memo(AddNewMovie);

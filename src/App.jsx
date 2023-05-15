@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import Navbar from './Navbar'
-import Home from './Home';
-import CreatePerson from './CreatePerson';
-import PersonDetails from './PersonDetails';
+import Navbar from './components/Navbar'
+import Home from './components/Home';
+import CreatePerson from './components/CreatePerson';
+import PersonDetails from './components/PersonDetails';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
-import NotFound from './NotFound';
-import AllMovies from './AllMovies';
+import NotFound from './components/NotFound';
+import AllMovies from './components/AllMovies';
 
 function App() {
 
