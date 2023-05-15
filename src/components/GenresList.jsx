@@ -7,6 +7,7 @@ import { memo } from "react";
 
 const GenresList = ({ genres, title }) => {
 
+   // Check if there are no genres available
   if (genres.length === 0) {
     return <div>
       <CustomTitle>{title}</CustomTitle>
@@ -14,6 +15,7 @@ const GenresList = ({ genres, title }) => {
     </div>;
   }
 
+  // display person genres list
   return (
     <div>
       <CustomTitle>{title}</CustomTitle>
@@ -34,6 +36,7 @@ const GenresList = ({ genres, title }) => {
 
 export default memo(GenresList);
 
+// CustomTitle component with some additional styles
 const CustomTitle = styled(Title)`
   display: flex;
   justify-content: center;
@@ -41,6 +44,7 @@ const CustomTitle = styled(Title)`
   margin: 0 auto;
 `;
 
+// Custom container for the genres list
 const GenresListContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -61,6 +65,7 @@ const UlStyled = styled.ul`
   margin: 0;
 `;
 
+// Styling for each genre tag
 const Tag = styled.li`
   justify-content: center;
   width: 120px;
