@@ -4,9 +4,11 @@ import { useState } from 'react';
 const AddMovieRating = ({ movie, id, setIsPending }) => {
   const [ratings, setRatings] = useState([]);
 
+   // handle the submission of a rating for a movie
   const handleRatingSubmit = async (personRating) => {
     setIsPending(true);
 
+     // Send a POST request to the server with the personId, movieId, and rating data
     fetch(`https://localhost:7294/api/personMovie/movierating?personId=${id}&movieId=${movie.movieId}`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
@@ -18,6 +20,7 @@ const AddMovieRating = ({ movie, id, setIsPending }) => {
       return response.json();
     }).then((newRatingData) => {
       setIsPending(false);
+      // Update the ratings state with the added rating
       setRatings([...ratings, newRatingData]);
     })
       .catch((error) => {
@@ -27,6 +30,7 @@ const AddMovieRating = ({ movie, id, setIsPending }) => {
   }
 
   return (
+     // Render a star rating component
     <Rating
       iconsCount={5}
       initialValue={movie.movieRating}
